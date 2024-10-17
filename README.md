@@ -9,6 +9,9 @@
 ## Meeting time
 
 * Thursdays at 9am MST
+* https://cuboulder.zoom.us/j/97736756430
+* Meeting ID: 977 3675 6430
+* Passcode: 126021
 
 ## Vision Statement
 
