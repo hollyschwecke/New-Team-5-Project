@@ -29,3 +29,7 @@ The group worked on tasks assigned last week and discussed changing roles for th
 - Holly: Updated week 5 meeting notes to keep track of what happened during the meeting
 - Claire: Updated small details of the UI Mockup per meeting notes from week 5 and created new schema page layout for inventory items.
 - Cole: Not responsive to team (email or meeting time)
+
+  ## Week 8
+  Claire, Therese, and Holly met with Professor Knox to discuss project and group dynamic this far
+  It was decided that we would split our group and rework our project
