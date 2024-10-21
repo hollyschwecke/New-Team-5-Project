@@ -1,4 +1,4 @@
-# Pets-R-Us
+# Pets-R-Us Inventory System
 
 ## Team 5: git good
 
