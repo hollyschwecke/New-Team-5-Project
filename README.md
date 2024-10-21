@@ -15,11 +15,11 @@
 
 ## Vision Statement
 
-* Our product's goal is to track inventory levels for business optimization.
+* Our product's goal is to track inventory levels of a pet supply website for business optimization. It will seamlessly integrate with their website to ensure inventory levels are always accurate to minimize operational disruptions. 
 
 ## Motivation
 
-* From personal experience with insufficient software, we wanted to improve inventory tracking efficiency to provide customers with a better and less stressful experience.
+* From personal experience with insufficient software and current market offerings for pet digital storefronts, we wanted to improve inventory tracking efficiency. This will provide customers with a less frustrating and more enjoyable experience when shopping for our fur babies. This system creates a fresh take on typical inventory management systems that is more user-oriented and secure when updating inventory levels.
 
 ## Risks to project completion
 
@@ -36,7 +36,7 @@
 
 ## Development method
 
-* Kanban development method with weekly meetings
+* Use of Kanban boards with weekly scrum meetings to keep track of progress
 
 ## Project Tracking Software
 
