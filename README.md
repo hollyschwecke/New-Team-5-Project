@@ -1,4 +1,4 @@
-# New-Team-5-Project
+# Pets-R-Us
 
 ## Team 5: git good
 
