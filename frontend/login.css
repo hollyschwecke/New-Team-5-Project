@@ -1,16 +1,23 @@
+/*  
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create CSS for login page to make it look more professional
+Usage: utilize the HTML file that this login page is connected to "login.html" to adjust the styling of the HTML page
+*/
+
 /* Color Palette
 --taupe: #504136ff;
 --beaver: #a48c79ff;
 --rich-black: #050d10ff;
 --white: #fcfcfcff; */
-/* Reset basic styles */
 
+/* Reset basic styles to defaults in case their are issues */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body of page styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
@@ -21,6 +28,8 @@ body {
     margin: 0;
     text-align: center;
 }
+
+/* Styles for main container for information on the page */
 .container {
     width: 100%;
     max-width: 600px;
@@ -31,22 +40,26 @@ body {
     text-align: center;
 }
 
+/* Styles for header "Pets-R-Us ..." */
 .headerinfo {
-    width: 100%;                 /* Full width */
-    max-width: 600px;           /* Match the form's width */
-    text-align: center;          /* Centered text */
-    padding: 20px;               /* Padding for spacing */
-    margin-bottom: 30px;         /* Space between header and form */
-    /* background-color: #007BFF;  Optional: Add background color */
-    color: black;                /* Text color */
+    width: 100%;                 
+    max-width: 600px;           
+    text-align: center;          
+    padding: 20px;               
+    margin-bottom: 30px;         
+    color: black;                
     border-radius: 5px; 
+    font-family: "Spectral SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
+/* Icon adjustments */
 .icon {
-    width: 50px; /* Adjust the width of the icon */
-    height: 50px; /* Adjust the height of the icon */
-    margin-right: 8px; /* Space between icon and text */
-    vertical-align: middle; /* Align icon vertically in the middle */
+    width: 50px; 
+    height: 50px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
 }
 
 /* Container for the login form */
@@ -54,32 +67,37 @@ body {
     background-color: #a48c79ff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* max-width: 400px;
-    width: 100%;
-    text-align: center; */
+    box-shadow: 0 4px 8px black;
+    font-family: "Spectral SC", serif;
+    font-weight: 800;
+    font-style: normal;
 }
 
-/* Style the labels */
+/* Style the labels on the form */
 .login-container label {
     display: block;
     text-align: left;
     margin-bottom: 8px;
     font-weight: bold;
     color: black;
+    font-family: "Spectral SC", serif;
+    font-weight: 800;
+    font-style: normal;
 }
 
-/* Style the input fields */
+/* Style the input fields of the form */
 .login-container input[type="text"],
 .login-container input[type="password"] {
     width: 100%;
     padding: 12px;
     margin: 8px 0 16px 0;
-    /* display: inline-block; */
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
+    font-family: "Spectral SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Style the submit button */
@@ -93,8 +111,12 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 20px;
+    font-family: "Spectral SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
+/* Styles the hover function over the submit button */
 .login-container input[type="submit"]:hover {
     background-color: #504136ff;
     transform: scale(1.05);

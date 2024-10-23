@@ -1,19 +1,30 @@
+<!-- 
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create a login page for users to login to the inventory system
+Usage: utilize the css file for the login page "login.css", javascript, and node.js to link to username and password database to login users in 
+-->
 <!DOCTYPE html>
 <html lang="en"> 
     <head> 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="login.css" type="text/css" rel="stylesheet"/>
+        <!-- Added Google font info -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;800&display=swap" rel="stylesheet">
+        <!-- Title of Page (shows up on tab) -->
         <title>Login to PETS-R-US Inventory System</title>
     </head>
 
     <body> 
     <div class="container">
+        <!-- header with icon in there -->
         <div class="headerinfo">
             <img src="./front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
             <h1>PETS-R-US Inventory System</h1>
         </div>
-        
+        <!-- start of login form layout -->
         <div class="login-container">
             <h2>Login</h2>
             <form id="loginForm">
@@ -26,13 +37,14 @@
                 <input type="submit" value="Sign In">
             </form>
         </div>
-    </div>
-
+    </div> 
+        <!-- Javascript for linking to database for user logins -->
         <script>
+            // listens for login form submit button and prevents refreshing the page right away, instead goes to javascript
             document.getElementById("loginForm").addEventListener("submit", function(event) {
                 event.preventDefault();
 
-                // Gather form data
+                // Get data from form (username and password)
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
 
@@ -44,6 +56,7 @@
                     },
                     body: JSON.stringify({ username, password })
                 })
+                // proceses the response from server and sees if it is successful
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -52,6 +65,7 @@
                         alert("Invalid credentials.");
                     }
                 })
+                // if any errors, logs them to the console (debugging use)
                 .catch(error => {
                     console.error('Error:', error);
                 });
