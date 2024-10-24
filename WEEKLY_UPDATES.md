@@ -37,7 +37,7 @@ It was decided that we would split our group and rework our project. A secondary
 - Therese: Put a few action items into Trello regarding the database structure and work on these or other action items.
 - Holly: Put a few action items into Trello regarding HTML and work on these or other action items.
 
- <<<<<<< ThereseGoshen-patch-1
+
    ## Week 9
    Claire, Therese, and Holly met together to record the Agile meeting.
    - Holly: Started coding the front end. Helped create login.css and login.html. Will start working on the basic html for the add product page
@@ -45,5 +45,5 @@ It was decided that we would split our group and rework our project. A secondary
    - Therese: Started forumlatng backend. Started creating queries and API. Will continue to work backend
 
 ![image](./images/Week9.png)
->>>>>>> main
+
 
