@@ -37,5 +37,4 @@ It was decided that we would split our group and rework our project. A secondary
 - Therese: Put a few action items into Trello regarding the database structure and work on these or other action items.
 - Holly: Put a few action items into Trello regarding HTML and work on these or other action items.
  
-## Week 9
-![image](./images/Week9.png)
+
