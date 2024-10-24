@@ -38,3 +38,8 @@ The group worked on tasks assigned last week and discussed changing roles for th
   - Holly: Put a few action items into Trello regarding HTML and work on these or other action items.
  
    ## Week 9
+   Claire, Therese, and Holly met together to record the Agile meeting.
+   - Holly: Started coding the front end. Helped create login.css and login.html. Will start working on the basic html for the add product page
+   - Claire: Updated the UI for the current product. Created basic layout for login HTML and login CSS.
+   - Therese: Started forumlatng backend. Started creating queries and API. Will continue to work backend
+
