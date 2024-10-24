@@ -30,16 +30,11 @@ The group worked on tasks assigned last week and discussed changing roles for th
 - Claire: Updated small details of the UI Mockup per meeting notes from week 5 and created new schema page layout for inventory items.
 - Cole: Not responsive to team (email or meeting time)
 
-  ## Week 8
-  Claire, Therese, and Holly met with Professor Knox to discuss project and group dynamic this far
-  It was decided that we would split our group and rework our project. A secondary meeting took place Sunday where we updated the new README and starte to assign general tasks via utilizing Trello.
-  - Claire: Put a few action items into Trello regarding HTML and CSS, and work on these or other action items depending on the other items' priorities.
-  - Therese: Put a few action items into Trello regarding the database structure and work on these or other action items.
-  - Holly: Put a few action items into Trello regarding HTML and work on these or other action items.
+## Week 8
+Claire, Therese, and Holly met with Professor Knox to discuss project and group dynamic this far
+It was decided that we would split our group and rework our project. A secondary meeting took place Sunday where we updated the new README and starte to assign general tasks via utilizing Trello.
+- Claire: Put a few action items into Trello regarding HTML and CSS, and work on these or other action items depending on the other items' priorities.
+- Therese: Put a few action items into Trello regarding the database structure and work on these or other action items.
+- Holly: Put a few action items into Trello regarding HTML and work on these or other action items.
  
-   ## Week 9
-   Claire, Therese, and Holly met together to record the Agile meeting.
-   - Holly: Started coding the front end. Helped create login.css and login.html. Will start working on the basic html for the add product page
-   - Claire: Updated the UI for the current product. Created basic layout for login HTML and login CSS.
-   - Therese: Started forumlatng backend. Started creating queries and API. Will continue to work backend
 
