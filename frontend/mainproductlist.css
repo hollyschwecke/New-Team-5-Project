@@ -1,0 +1,205 @@
+/*  
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create CSS for product list page to make it look more professional
+Usage: utilize the HTML file that this product list page is connected to "mainproductlist.html" to adjust the styling of the HTML page
+*/
+
+/* Color Palette
+--taupe: #504136ff;
+--beaver: #a48c79ff;
+--rich-black: #050d10ff;
+--white: #fcfcfcff; */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body of page styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+/* #backButton {
+    background-color: transparent;
+    border: none;
+    font-size: 24px; /* Adjust size as needed */
+    /* cursor: pointer;
+    text-align: left;
+    margin: 0px 70px 100px 25px;
+} */ 
+
+/* sign out button styling */
+#signOutButton {
+    background-color: #504136ff; /* Red color */
+    color: white;
+    border: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    
+}
+
+#signOutButton:hover {
+    background-color: #a48c79ff; /* Darker red on hover */
+}
+/* username styling for username to be displayed in top right corner */
+#usernameDisplay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    color: black; 
+    font-weight: bold;
+}
+
+.username {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 18px;
+    color: #050d10ff;
+}
+/* header container, headerpets (PETS-R-US...), and producthearderbox (products) */
+.headercontainer {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+
+.headerpets {
+    width: 100%;                 
+    max-width: 600px;           
+    text-align: center;          
+    padding: 20px;      
+    margin: 0 auto;         
+    margin-bottom: 20px;         
+    color: black;                
+    border-radius: 5px; 
+    font-family: "Spectral SC", serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+.productheaderbox {
+    padding: 10px 20px;
+    background-color: #a48c79ff;; 
+    border-radius: 8px; 
+    color: #050d10ff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Icon (pawprint) adjustments */
+.icon {
+    width: 50px; 
+    height: 50px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
+}
+
+
+#filteredImage {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding-top: 10px;
+}
+
+#filteredImage:hover {
+    background-color: #a48c79ff;
+}
+/* search container: input, filter, and add product icon button */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    justify-content: middle;
+    margin: 10px;
+    border-bottom: 4px solid #050d10ff;
+    box-sizing: border-box;
+    background-color: pink;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 2px solid #050d10ff;
+    border-radius: 5px;
+}
+
+#filterSelect {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    border: 1px solid #fcfcfcff;
+    border-radius: 4px;
+    width: 200px; 
+    height: auto; 
+    overflow: auto; 
+}
+
+/* Icon (plus sign) adjustments */
+.icon2 {
+    width: 40px; 
+    height: 40px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
+}
+
+.icon2:hover {
+    background-color: #050d10ff;
+    border-radius: 4px;
+}
+
+/* search button styles */
+#searchButton {
+    padding: 10px;
+    font-size: 16px;
+    border: none; 
+    background-color: #050d10ff; 
+    color: white; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+#searchButton:hover {
+    background-color: #a48c79ff;
+}
+
+/* results container styles */
+#resultsContainer {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #fcfcfcff;
+    border-radius: 4px;
+    border-bottom: 4px solid black;
+}

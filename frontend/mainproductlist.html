@@ -1,0 +1,55 @@
+<!-- 
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create a main product list page for users to look at all of the inventory, be able to filter their inventory, add a search bar, and add products
+Usage: utilize the css file for the login page "mainproductlist.css", javascript, and node.js to link to product database 
+-->
+<!DOCTYPE html>
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="mainproductlist.css" type="text/css" rel="stylesheet"/>
+        <!-- Added Google font info -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;800&display=swap" rel="stylesheet">
+        <!-- Title of Page (shows up on tab) -->
+        <title>PETS-R-US Product List</title>
+    </head>
+    <body>
+        <!-- <button id="backButton">← Back</button> -->
+        <button id="signOutButton">Sign Out</button>
+        <div class = "headercontainer">
+            <div class="headerpets">
+                <img src="./front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
+                <h1>PETS-R-US Inventory System</h1>
+            </div>
+            <div class = "searchcontainer">
+                <div class="productheaderbox">
+                    <h2>Products</h2>
+                </div>
+                    <input type="text" id="searchInput" placeholder="Searching...">
+                    <!-- <img id="filteredImage" src="./front_images/empty-filter-128.png" alt="Filtered Image"> -->
+                    <select id="filterSelect">
+                        <option value="">All</option>
+                        <option value="Category 1">Alphabetically</option>
+                        <option value="Category 2">Product Name</option>
+                        <option value="Category 3">Price: Low to High</option>
+                        <option value="Category 4">Price: High to Low</option>
+                        <option value="Category 5">Product ID number</option>
+                    </select>
+                    <button id="searchButton">Search</button>
+                <!-- MAKE SURE TO ADD CORRECT PAGE LINK -->
+                <a href="./addproduct.html"><img src="./front_images/plus-6-128.png" alt="brown plus sign icon" class="icon2"></a>
+            </div> 
+            <div id="usernameDisplay"></div>
+            <div id="resultsContainer"></div>
+        </div>
+
+    
+
+
+        <!-- Loading JavaScript Elements, but making sure those elements exist before doing that -->
+        <script src="mainproductlist.js"></script>
+    </body>
+</html>
