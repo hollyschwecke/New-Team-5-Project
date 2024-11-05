@@ -5,8 +5,8 @@
   - username: a unique username for each user
   - password: a secure password that 
 * List of tests for verifying each table
-  Use case name : 
-      Verify login with valid user name and password
+  ### Use case name : 
+  Verify login with valid user name and password
     - Description:
       Test the Inventory System login page
     - Pre-conditions (what needs to be true about the system before the test can be applied):
@@ -39,8 +39,8 @@
   - quantity available: number of a specific product in stock that are available to purchase by customers
   - quantity sold: number of a specific product already sold
 * List of tests for verifying each table
-  Use case name : 
-      Verify product has its information attached to it
+  ### Use case name : 
+   Verify product has its information attached to it
     - Description:
       Test the Inventory System main product list page
     - Pre-conditions (what needs to be true about the system before the test can be applied):
@@ -61,8 +61,8 @@
       Products are validated with database and successfully able to see the product or products they searched for.
       The account session details are logged in database.
 
-  Use case name : 
-      Verify adding products is able to attach information to the database
+  ### Use case name : 
+   Verify adding products is able to attach information to the database
    - Description:
       Test the Inventory System add product page
     - Pre-conditions (what needs to be true about the system before the test can be applied):
@@ -88,8 +88,8 @@
 * Table Description
 * For each field of the table, provide name and short description.
 * List of tests for verifying each table
-  Use case name : 
-      Verify login with valid user name and password
+  ### Use case name : 
+  Verify login with valid user name and password
     - Description:
       Test the Inventory System login page
     - Pre-conditions (what needs to be true about the system before the test can be applied):
