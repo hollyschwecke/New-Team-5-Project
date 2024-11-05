@@ -5,8 +5,6 @@ from flask import Flask, render_template
 app = Flask(__name__)
 import sqlite3
 
-app = Flask(__name__)
-
 @app.route('/')
 def logging_in():
     return render_template('static/login.html') #username=username
