@@ -36,6 +36,6 @@ def main_product():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    logging_in()
-    searching()
-    main_product()
+    # logging_in()
+    # searching()
+    # main_product()
