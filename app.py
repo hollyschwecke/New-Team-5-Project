@@ -1,7 +1,8 @@
 #potentially needing to use this file to help connect with database and flask and backend
 
-
-from flask import Flask, render_template
+import psycopg2
+from flask import Flask
+app = Flask(__name__)
 import sqlite3
 
 app = Flask(__name__)
