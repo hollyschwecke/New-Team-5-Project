@@ -1,0 +1,59 @@
+<!--
+    Author: Holly Schwecke
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="addproduct.css" type="text/css" rel="stylesheet">
+        <title>Add Product</title>
+    </head>
+    <body>
+        <!-- header w/ icon -->
+        <div class="container">
+            <div class="header">
+                <img src="./front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
+                <span class="PRU">PETS-R-US Inventory System</span>
+            </div>
+            <!-- start of product info entries -->
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="product-name"required> <!-- input product name -->
+                </div>
+                <div class="form-group">
+                    <label for="category">Product Category:</label>
+                    <select id="category" name="category" required> <!-- input product category -->
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="dog-food">Dog food</option>
+                        <option value="cat-food">Cat Food</option>
+                        <option value="dog-toy">Dog Toy</option>
+                        <option value="cat-toy">Cat Toy</option>
+                        <option value="dog-treat">Dog Treat</option>
+                        <option value="cat-treat">Cat Treat</option> 
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" step="0.01" required> <!-- input price -->
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea> <!-- text box for desc -->
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Available Quantity:</label>
+                    <input type="number" id="quantity" min="0" required> <!-- input for quantity -->
+                </div>
+                <div class="form-group">
+                    <label for="picture">Upload Product Images:</label>
+                    <input type="file" id="images" name="images" accept="image/*" multiple required> <!-- input for images -->
+                <button class="icon-button">
+                        <img src="./front_images/plus_128.png" alt="brown plus sign" class="icon">
+                </button>
+            </form>
+        </div>
+    </body>
+</html>
