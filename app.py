@@ -34,8 +34,8 @@ def main_product():
 #     return username[0] if username else "Guest"
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
     # logging_in()
     # searching()
     # main_product()
