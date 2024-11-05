@@ -6,9 +6,19 @@ import sqlite3
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return "Hello World!"
+@app.route('/login')
+def logging_in():
+    return render_template('login.html') #username=username
+
+@app.route('/search')
+def searching():
+    return render_template('searchpage.html') #username=username
+
+@app.route('/mainproductlist')
+def main_product():
+    return render_template('mainproductlist.html') #username=username
+
+
 # def get_username():
 #     # Connect to your database
 #     conn = sqlite3.connect('your_database.db')
@@ -22,10 +32,9 @@ def hello_world():
     
 #     return username[0] if username else "Guest"
 
-# @app.route('/')
-# def index():
-#     username = get_username()
-#     return render_template('index.html', username=username)
 
 if __name__ == '__main__':
     app.run(debug=True)
+    logging_in()
+    searching()
+    main_product()
