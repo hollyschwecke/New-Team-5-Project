@@ -9,15 +9,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def logging_in():
-    return render_template('templates/static/login.html') #username=username
+    return render_template('static/login.html') #username=username
 
 @app.route('/search')
 def searching():
-    return render_template('templates/static/searchpage.html') #username=username
+    return render_template('static/searchpage.html') #username=username
 
 @app.route('/mainproductlist')
 def main_product():
-    return render_template('templates/static/mainproductlist.html') #username=username
+    return render_template('static/mainproductlist.html') #username=username
 
 
 # def get_username():
