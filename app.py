@@ -17,6 +17,9 @@ def searching():
 def main_product():
     return render_template('mainproductlist.html') 
 
+@app.route('/addproduct')
+def adding_product():
+    return render_template('addproduct.html') 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3308)
