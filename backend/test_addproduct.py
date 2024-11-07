@@ -43,7 +43,7 @@ class TestAddProduct(unittest.TestCase):
                     )''')
         
         #Create the Orders table
-            c.execute('''CREATE TABLE IF NOT EXISTS Orders (
+        c.execute('''CREATE TABLE IF NOT EXISTS Orders (
                         order_id INTEGER PRIMARY KEY AUTOINCREMENT,
                         user_id INTEGER,
                         product_id INTEGER,
