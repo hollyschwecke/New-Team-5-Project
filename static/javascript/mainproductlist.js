@@ -12,7 +12,7 @@ Usage: utilize the HTML and CSS files that are linked to the  product list page 
 //Sign Out button click function added that links to login page and clears session data
 document.getElementById('signOutButton').addEventListener('click', function() {
     sessionStorage.clear();
-    window.location.href = './login.html';
+    window.location.href = './';
 });
 
 //function that retrieves username from DB, stores username in session and updates the display
