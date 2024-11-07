@@ -33,6 +33,25 @@ class TestAddProduct(unittest.TestCase):
                         name TEXT NOT NULL
                         discription TEXT
                     )''')
+        
+        # Create the Suppliers table
+        c.execute('''CREATE TABLE IF NOT EXISTS Suppliers (
+                        supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name TEXT NOT NULL,
+                        email TEXT NOT NULL,
+                        phone TEXT NOT NULL
+                    )''')
+        
+        #Create the Orders table
+            c.execute('''CREATE TABLE IF NOT EXISTS Orders (
+                        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        user_id INTEGER,
+                        product_id INTEGER,
+                        quantity INTEGER,
+                        date TEXT,
+                        FOREIGN KEY (user_id) REFERENCES Users (user_id),
+                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
+                    )''')
     
     
     
