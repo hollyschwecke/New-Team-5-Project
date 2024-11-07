@@ -52,15 +52,7 @@ def create(db_filename):
                         discription TEXT
                     )''')
     
-    # Create supplier table
     
-    c.execute('''CREATE TABLE IF NOT EXISTS Suppliers (
-                        supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        address TEXT,
-                        phone TEXT,
-                        email TEXT
-                    )''')
     
     # Create the Inventory table
     c.execute('''CREATE TABLE IF NOT EXISTS Inventory (
@@ -69,14 +61,6 @@ def create(db_filename):
                         FOREIGN KEY (product_id) REFERENCES Products (product_id)
                     )''')
     
-    # Create the Orders table
-    c.execute('''CREATE TABLE IF NOT EXISTS Orders (
-                        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        product_id INTEGER,
-                        quantity INTEGER,
-                        date TEXT,
-                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
-                    )''')
     
     # Create the Users table
     c.execute('''CREATE TABLE IF NOT EXISTS Users (
