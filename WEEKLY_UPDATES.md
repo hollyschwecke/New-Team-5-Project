@@ -52,3 +52,10 @@ Claire, Therese, and Holly met together to record the Agile meeting.
    - Claire: Created basic HTML layout and the CSS for welcome page and product list page. Continuing to work on dropdown menu and getting started on hosting with Therese.
    - Therese: Continuing to work on backend and working on getting hosting up and running with Claire. 
 ![image](./images/Week10.png)
+
+## Week 11
+ Claire, Therese, and Holly met together in their meeting.
+   - Holly: Working on connecting one database to the proper webpage.
+   - Claire: Working on connecting second database to proper webpage and making a create account button that links to a create account page.
+   - Therese: Working on creating last HTML and CSS page. 
+![image](./images/Week11.png)
