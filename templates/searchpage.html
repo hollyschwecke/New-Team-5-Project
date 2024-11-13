@@ -9,7 +9,7 @@ Usage: utilize the css file for the login page "searchpage.css", javascript, and
     <head> 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./static/css/searchpage.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/searchpage.css" type="text/css" rel="stylesheet"/>
         <!-- Added Google font info -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +18,10 @@ Usage: utilize the css file for the login page "searchpage.css", javascript, and
         <title>PETS-R-US Search</title>
     </head>
     <body>
-        <button id="signOutButton">Sign Out</button>
+        <a href="./login.html"><button id="signOutButton">Sign Out</button></a>
         <div class = "headercontainer">
             <div class="headerpets">
-                <img src="./static/front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
+                <img src="../static/front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
                 <h1>PETS-R-US Inventory System</h1>
             </div>
             <div class="welcome">
@@ -41,13 +41,13 @@ Usage: utilize the css file for the login page "searchpage.css", javascript, and
                     </select>
                     <button id="searchButton">Search</button>
                 <!-- MAKE SURE TO ADD CORRECT PAGE LINK -->
-                <a href="./addproduct.html"><img src="./static/front_images/plus-6-128.png" alt="brown plus sign icon" class="icon2"></a>
+                <a href="./addproduct.html"><img src="../static/front_images/plus-6-128.png" alt="brown plus sign icon" class="icon2"></a>
             </div> 
             <div id="usernameDisplay"></div>
             <div id="resultsContainer"></div>
         </div>
 
         <!-- Loading JavaScript Elements, but making sure those elements exist before doing that -->
-        <script src="./static/javascript/searchpage.js"></script>
+        <script src="../static/javascript/searchpage.js"></script>
     </body>
 </html>

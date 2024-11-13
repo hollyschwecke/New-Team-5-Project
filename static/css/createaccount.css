@@ -1,7 +1,7 @@
 /*  
 Author: Claire Lueking, CSPB 3308 Fall 2024
-Purpose: Create CSS for login page to make it look more professional
-Usage: utilize the HTML file that this login page is connected to "login.html" to adjust the styling of the HTML page
+Purpose: Create CSS for the create account page to make it look more professional
+Usage: utilize the HTML file that this create account page page is connected to "createaccount.html" to adjust the styling of the HTML page
 */
 
 /* Color Palette
@@ -61,21 +61,9 @@ body {
     margin-right: 8px; 
     vertical-align: middle; 
 }
-#creaccntbutton {
-    background-color: #504136ff; 
-    color: white;
-    border: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
-/* Container for the login form */
-.login-container {
+/* Container for the create form */
+.create-container {
     background-color: #a48c79ff;
     padding: 20px;
     border-radius: 8px;
@@ -86,7 +74,7 @@ body {
 }
 
 /* Style the labels on the form */
-.login-container label {
+.create-container label {
     display: block;
     text-align: left;
     margin-bottom: 8px;
@@ -98,8 +86,8 @@ body {
 }
 
 /* Style the input fields of the form */
-.login-container input[type="text"],
-.login-container input[type="password"] {
+.create-container input[type="text"],
+.create-container input[type="password"] {
     width: 100%;
     padding: 12px;
     margin: 8px 0 16px 0;
@@ -113,7 +101,7 @@ body {
 }
 
 /* Style the submit button */
-.login-container input[type="submit"] {
+.create-container input[type="submit"] {
     width: 100%;
     margin-top: 30px;
     padding: 10px;
@@ -129,14 +117,14 @@ body {
 }
 
 /* Styles the hover function over the submit button */
-.login-container input[type="submit"]:hover {
+.create-container input[type="submit"]:hover {
     background-color: #504136ff;
     transform: scale(1.05);
 }
 
 /* Responsive changes for smaller screens */
 @media screen and (max-width: 600px) {
-    .login-container {
+    .create-container {
         padding: 15px;
         width: 90%;
     }

@@ -1,0 +1,46 @@
+<!-- 
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create a create account page for users to make login information for the inventory system
+Usage: utilize the css file for the  page "createaccount.css", javascript, and node.js to link to username and password database to add new logins to the database 
+-->
+<!DOCTYPE html>
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../static/css/createaccount.css" type="text/css" rel="stylesheet"/>
+        <!-- Added Google font info -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@400;800&display=swap" rel="stylesheet">
+        <!-- Title of Page (shows up on tab) -->
+        <title>Create Account for PETS-R-US Inventory System</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- header with icon in there -->
+            <div class="headerinfo">
+                <img src="../static/front_images/pawprint_128.png" alt="brown pawprint icon" class="icon">
+                <h1>PETS-R-US Inventory System</h1>
+            </div>
+            <!-- start of create account form layout -->
+            <div class="create-container">
+                <h2>Create Account</h2>
+                <form id="createForm">
+                    <label for="email"> Email:</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    
+                    <input type="submit" value="Create Account">
+                </form>
+            </div>
+        </div> 
+            <!-- Javascript for linking to database for user logins -->
+            <script src="../static/javascript/createaccount.js"></script>
+    </body>
+</html>

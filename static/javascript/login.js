@@ -1,3 +1,9 @@
+/*  
+Author: Claire Lueking, CSPB 3308 Fall 2024
+Purpose: Create Javascript functionality for login page to help it function with database
+Usage: utilize the HTML and CSS files that are linked to the login page to adjust the signing in/out and database linking 
+*/
+
 // listens for login form submit button and prevents refreshing the page right away, instead goes to javascript
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -14,7 +20,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         },
         body: JSON.stringify({ username, password })
     })
-    // proceses the response from server and sees if it is successful
+    // procceses the response from server and sees if it is successful
     .then(response => response.json())
     .then(data => {
         if (data.success) {

@@ -39,7 +39,7 @@ body {
 
 /* sign out button styling */
 #signOutButton {
-    background-color: #504136ff; /* Red color */
+    background-color: #504136ff; 
     color: white;
     border: none;
     position: absolute;
