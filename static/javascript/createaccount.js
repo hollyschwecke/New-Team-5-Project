@@ -13,7 +13,7 @@ document.getElementById("createForm").addEventListener("submit", function(event)
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Send login request to the server
+    // Send add data request to the server
     fetch('/createaccount', {
         method: 'POST',
         headers: {
