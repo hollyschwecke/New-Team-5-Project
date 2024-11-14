@@ -28,5 +28,9 @@ def adding_product():
 def creating_account():
     return render_template('createaccount.html') #, tables=[login.to_html(classes='data', header="true")])
 
+@app.route('/main_page')
+def creating_main_page():
+    return render_template('main_page.html')
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3308)
