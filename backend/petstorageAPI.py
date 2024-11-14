@@ -45,6 +45,13 @@ def create(db_filename):
                         FOREIGN KEY (category_id) REFERENCES Categories (category_id),
                         FOREIGN KEY (supplier_id) REFERENCES Suppliers (supplier_id)
                     )''')
+
+    # Create the ProductImages table
+    c.execute('''CREATE TABLE IF NOT EXISTS ProductImages (
+                        image_id INTERGER PRIMARY KEY AUTOINCREMENT
+                        product_id INTEGER,
+                        image_path TEXT,
+                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
     
     # Create the Categories table
     c.execute('''CREATE TABLE IF NOT EXISTS Categories (
