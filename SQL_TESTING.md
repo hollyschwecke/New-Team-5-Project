@@ -119,3 +119,24 @@
     - Post-conditions (what must be true about the system when the test has completed successfully):
       Supplier is validated with database and successfully had information pulled up when attached to a product.
       The account session details are logged in database. 
+
+# Table 4
+* Table name: Categories 
+* Table description: The Categories table store the information about different product categories within the inventory system. Each catagory has a unique id, name, and optional description. The table will help organize products in the inventory. 
+* For each field of the table, provide a name and short decription:
+  - category_id: a unique integer that serves as the primary key for each category that automatically increments with each new entry. PRIMARY KEY, AUTOINCREMENT
+  - name: the name of the category, which provides a clear identifier for each type of product grouping(ex: 'Food', 'Toys', 'Hygiene') TEXT
+  - description: An optional text field that provides additional details about the category. TExT (nullable)
+  
+  ### Use Case Name :
+  Verify the creation of Categories table
+  - Description: Check that the categories table is created and successfully in the database. 
+  - Pre-conditions: Database connection is established
+  - Test Steps:
+    1. Run the SQL command to create the categories table
+    2. Query the database metadata to check if the categories table exists. 
+  - Expected result: Categories table is present in the database schema. 
+  - Actual result: (when testing)
+  - Status: pass/fail
+  - Notes: N/A
+  - Pre-condiitons: The Categories table exists and the command to create the table is is successful. 
