@@ -19,9 +19,9 @@ def check_user_credentials(username, password):
     conn.close()
     return user # if found
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 # handles login authentication
 @app.route('/login', methods=['POST'])
