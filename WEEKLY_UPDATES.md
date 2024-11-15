@@ -59,3 +59,10 @@ Claire, Therese, and Holly met together to record the Agile meeting.
    - Claire: Working on connecting second database to proper webpage and making a create account button that links to a create account page.
    - Therese: Working on creating last HTML and CSS page. 
 ![image](./images/Week11.png)
+
+## Week 12
+ Claire, Therese, and Holly met together in their meeting.
+   - Holly: Working on finishing connecting the User database to the login webpage.
+   - Claire: Working on connecting product database to mainproductlist webpage and filling the database.
+   - Therese: Working on connecting the User and Product Databases to their proper pages. 
+![image](./images/Week12.png)
