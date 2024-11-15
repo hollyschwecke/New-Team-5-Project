@@ -1,9 +1,6 @@
 #routes for render and flask
 
 import psycopg2
-# import petstore.db
-# import login.db
-# import suppliers.db
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import sqlite3
