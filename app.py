@@ -1,9 +1,6 @@
 #routes for render and flask
 
 import psycopg2
-# import petstore.db
-# import login.db
-# import suppliers.db
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import sqlite3
@@ -22,9 +19,9 @@ def check_user_credentials(username, password):
     conn.close()
     return user # if found
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 # handles login authentication
 @app.route('/login', methods=['POST'])
@@ -36,7 +33,7 @@ def logging_in():
     user = check_user_credentials(username, password)
 
     if user:
-        return redirect(url_for('creating_main_page', username=username)) # user exists
+        return redirect(url_for('searching', username=username)) # user exists
     else:
         message = "Invalid username or password"
         return render_template('login.html', message=message)
