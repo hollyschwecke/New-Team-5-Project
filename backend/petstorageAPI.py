@@ -52,6 +52,7 @@ def create(db_filename):
                         product_id INTEGER,
                         image_path TEXT,
                         FOREIGN KEY (product_id) REFERENCES Products (product_id)
+                    )''')
     
     # Create the Categories table
     c.execute('''CREATE TABLE IF NOT EXISTS Categories (
