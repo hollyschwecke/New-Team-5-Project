@@ -33,7 +33,7 @@ def logging_in():
     user = check_user_credentials(username, password)
 
     if user:
-        return redirect(url_for('creating_main_page', username=username)) # user exists
+        return redirect(url_for('searching', username=username)) # user exists
     else:
         message = "Invalid username or password"
         return render_template('login.html', message=message)
