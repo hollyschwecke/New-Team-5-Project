@@ -45,7 +45,7 @@ def searching():
 
     # Default query to fetch all products
     query = '''
-        SELECT p.id, p.name, p.description, p.price, p.category, p.available_quantity, p.date_added, pi.image_path
+        SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, pi.image_path
         FROM Products p
         LEFT JOIN ProductImages pi ON p.id = pi.product_id
     '''
@@ -192,7 +192,7 @@ def creating_account():
     return render_template('createaccount.html')
  
 
-@app.route('/main_page')
+@app.route('/main_page') #consider switching to just / if using render as / is landing page for some reason -Claire
 def creating_main_page():
     return render_template('main_page.html')
 
