@@ -102,13 +102,6 @@ def create(db_filename):
     conn.close() # Close the connection
 
 
-
-
-
-
-# WORKING CODE FOR FILLING AND DROPPING THE TABLE
-
-
 def fill(db_filename):
     conn = sqlite3.connect(db_filename)
     c = conn.cursor()
@@ -194,6 +187,39 @@ def fill(db_filename):
     conn.commit()
     conn.close()
 
+def select(db_filename, table_name, columns='*', where_clause=None, params=()):
+    """
+    Fetch data from a specified table in the database.
+
+    Args:
+        db_filename (str): The database filename.
+        table_name (str): The name of the table to query.
+        columns (str or list): The columns to retrieve, '*' for all columns (default).
+        where_clause (str, optional): SQL WHERE clause without 'WHERE' (default: None).
+        params (tuple, optional): Parameters for the WHERE clause (default: empty tuple).
+
+    Returns:
+        list of tuples: The rows retrieved from the table.
+    """
+    conn = sqlite3.connect(db_filename)
+    c = conn.cursor()
+
+    # Convert list of columns to a comma-separated string
+    if isinstance(columns, list):
+        columns = ', '.join(columns)
+
+    # Build the query
+    query = f"SELECT {columns} FROM {table_name}"
+    if where_clause:
+        query += f" WHERE {where_clause}"
+
+    # Execute the query
+    c.execute(query, params)
+    results = c.fetchall()
+
+    conn.commit()
+    conn.close()
+    return results
 
 #drop table so there are no duplicates when calling
 def drop(db_filename):
@@ -224,4 +250,5 @@ if __name__ == '__main__':
     db_filename = 'petstore.db'
     create(db_filename)
     fill(db_filename)
+    select(db_filename)
     drop(db_filename) 
