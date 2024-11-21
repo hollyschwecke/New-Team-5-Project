@@ -251,4 +251,4 @@ if __name__ == '__main__':
     create(db_filename)
     fill(db_filename)
     select(db_filename)
-    drop(db_filename) 
+    # drop(db_filename) 
