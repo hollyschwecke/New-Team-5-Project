@@ -66,3 +66,11 @@ Claire, Therese, and Holly met together to record the Agile meeting.
    - Claire: Working on connecting product database to mainproductlist webpage and filling the database.
    - Therese: Working on connecting the User and Product Databases to their proper pages. 
 ![image](./images/Week12.png)
+
+
+## Week 13
+ Claire, Therese, and Holly met together in their meeting.
+   - Holly: Working on final touches with webpages. Additionally, she is working on helping with the web hosting and making the presentation slides.
+   - Claire: Working on connecting database to web hosting and the presentation slides.
+   - Therese: Working on connecting the database to the web hosting and the presentation slides.
+![image](./images/Week13.png)
