@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 
 def check_user_credentials(username, password):
-    conn = sqlite3.connect('petstore.db')
+    #conn = sqlite3.connect('petstore.db')
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     cur = conn.cursor()
 
     #query database
@@ -40,7 +41,8 @@ def logging_in():
 
 @app.route('/search')
 def searching():
-    conn = sqlite3.connect('petstore.db')
+    #conn = sqlite3.connect('petstore.db')
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     cur = conn.cursor()
 
     # Default query to fetch all products
@@ -97,7 +99,8 @@ def searching():
 @app.route('/mainproductlist')
 def main_product():
     # Connect to the database
-    conn = sqlite3.connect('petstore.db')
+    #conn = sqlite3.connect('petstore.db')
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     cursor = conn.cursor()
 
     # Fetch all products and their images
@@ -137,7 +140,8 @@ def adding_product():
             image_paths.append(img_path)
 
     # create connection to db
-    conn = sqlite3.connect('petstore.db')
+    #conn = sqlite3.connect('petstore.db')
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     cursor = conn.cursor()
 
     # insert product data into products table
@@ -172,7 +176,8 @@ def creating_account():
         date_created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         # Connect to the database
-        conn = sqlite3.connect('petstore.db')
+        #conn = sqlite3.connect('petstore.db')
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cursor = conn.cursor()
 
         # Insert the new user into the database
