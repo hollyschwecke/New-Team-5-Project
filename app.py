@@ -439,7 +439,7 @@ def creating_account():
     return render_template('createaccount.html')
  
 
-@app.route('/main_page') #consider switching to just / if using render as / is landing page for some reason -Claire
+@app.route('/') 
 def creating_main_page():
     return render_template('main_page.html')
 
