@@ -351,14 +351,14 @@ def main_product():
                GROUP_CONCAT(ProductImages.image_path) AS images
         FROM Products 
         LEFT JOIN ProductImages ON id = product_id
-        GROUP BY p.id
+        GROUP BY id
     ''')
     products = cursor.fetchall()
     conn.commit()
     conn.close()
 
     # Pass products to the HTML 
-    return render_template('mainproductlist.html', products=products)
+    return render_template('mainproductlist.html', products=Products)
 
 
 @app.route('/addproduct')
