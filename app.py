@@ -347,10 +347,10 @@ def main_product():
 
     # Fetch all products and their images
     cursor.execute('''
-        SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, 
-               GROUP_CONCAT(pi.image_path) AS images
-        FROM "Products" p
-        LEFT JOIN "ProductImages" pi ON p.id = pi.product_id
+        SELECT product_id, name, description, price, category_id, stock_quantity, date_added, 
+               GROUP_CONCAT(ProductImages.image_path) AS images
+        FROM Products 
+        LEFT JOIN ProductImages ON id = product_id
         GROUP BY p.id
     ''')
     products = cursor.fetchall()
