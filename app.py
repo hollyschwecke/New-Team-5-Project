@@ -2,7 +2,7 @@
 # Purpose: Create routes for Flask application to connect pages and databases
 # Usage: utilize imported packages, the petstore.db, and functions to be able to connect the databases to the proper pages
 import psycopg2
-import petstorageAPI
+# import petstorageAPI
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import sqlite3
@@ -202,9 +202,9 @@ def creating_main_page():
     return render_template('main_page.html')
 
 if __name__ == "__main__":
-    # app.run(host="0.0.0.0", port=3308)
-    db_filename = 'petstore.db'
-    create(db_filename)
-    fill(db_filename)
-    select(db_filename)
+    app.run(host="0.0.0.0", port=3308)
+    # db_filename = 'petstore.db'
+    # create(db_filename)
+    # fill(db_filename)
+    # select(db_filename)
     # drop(db_filename) 
