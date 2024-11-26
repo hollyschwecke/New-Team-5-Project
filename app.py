@@ -238,12 +238,12 @@ def drop(db_filename):
 
 
 
-if __name__ == '__main__':
-    db_filename = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    create(db_filename)
-    fill(db_filename)
-    select(db_filename)
-    # drop(db_filename) 
+# if __name__ == '__main__':
+#     db_filename = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+#     create(db_filename)
+#     fill(db_filename)
+#     select(db_filename)
+#     # drop(db_filename) 
 
 
 
@@ -349,8 +349,8 @@ def main_product():
     cursor.execute('''
         SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, 
                GROUP_CONCAT(pi.image_path) AS images
-        FROM Products p
-        LEFT JOIN ProductImages pi ON p.id = pi.product_id
+        FROM "Products" p
+        LEFT JOIN "ProductImages" pi ON p.id = pi.product_id
         GROUP BY p.id
     ''')
     products = cursor.fetchall()
