@@ -289,9 +289,9 @@ def searching():
 
     # Default query to fetch all products
     query = '''
-        SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, pi.image_path
-        FROM Products p
-        LEFT JOIN ProductImages pi ON p.id = pi.product_id
+        SELECT product_id, name, description, price, category_id, stock_quantity, date_added, ProductImages.image_path
+        FROM Products 
+        LEFT JOIN ProductImages ON id = product_id
     '''
     parameters = []
 
