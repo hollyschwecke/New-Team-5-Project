@@ -336,7 +336,7 @@ def searching():
 
     final_products = list(grouped_products.values())
 
-    return render_template('searchpage.html', products=final_products)
+    return render_template('searchpage.html', Products=final_products)
 
 @app.route('/mainproductlist')
 def main_product():
