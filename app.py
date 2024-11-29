@@ -405,7 +405,7 @@ def adding_product():
     conn.commit()
     conn.close()
     
-    return redirect(url_for('addproduct.html')
+    return redirect(url_for('addproduct.html'))
 
 
 @app.route('/createaccount', methods=['GET', 'POST'])
