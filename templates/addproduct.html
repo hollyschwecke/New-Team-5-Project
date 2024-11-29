@@ -23,7 +23,7 @@
                 <span class="PRU">PETS-R-US Inventory System</span>
             </div>
             <!-- start of product info entries -->
-            <form action="/addproduct" enctype="multipart/form-data"> <!-- enctype required when uploading images -->
+            <form action="/addproduct" method="POST" enctype="multipart/form-data"> <!-- enctype required when uploading images -->
                 <div class="form-group">
                     <label for="product-name">Product Name:</label>
                     <input type="text" id="product-name"required> <!-- input product name -->
@@ -60,6 +60,6 @@
                 </button>
             </form>
         </div>
-        <script src="./static/jacvascript/addproduct.js"></script>
+        <!-- <script src="./static/jacvascript/addproduct.js"></script> -->
     </body>
 </html>
