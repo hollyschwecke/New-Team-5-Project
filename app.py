@@ -361,7 +361,7 @@ def main_product():
     return render_template('mainproductlist.html', products=Products)
 
 
-@app.route('/addproduct')
+@app.route('/addproduct', methods=['POST'])
 def adding_product():
     # get form data
     name = request.form['product-name']
@@ -372,7 +372,7 @@ def adding_product():
     date_added = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     # handle image uploads
-    image_files = request.files.getlist('picture')
+    image_files = request.files.getlist('images')
     image_paths = []
     for img in image_files:
         if img:
@@ -389,17 +389,17 @@ def adding_product():
     # insert product data into products table
     cursor.execute('''
         INSERT INTO Products (name, description, price, category, available_quantity, date_added)
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s)
         ''', (name, description, price, category, available_quantity, date_added))
 
     # get id of last inserted product
-    product_id = cursor.lastrowid
+    product_id = cursor.fetchone()[0]
 
     # insert image paths into the ProductImages table
     for img_path in image_paths:
         cursor.execute('''
             INSERT INTO ProductImages (product_id, image_path)
-            VALUES (?, ?)
+            VALUES (%s, %s)
             ''', (product_id, img_path))
 
     conn.commit()
