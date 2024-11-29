@@ -361,7 +361,7 @@ def main_product():
     return render_template('mainproductlist.html', products=Products)
 
 
-@app.route('/addproduct', methods=['POST'])
+@app.route('/addproduct')
 def adding_product():
     # get form data
     name = request.form['product-name']
