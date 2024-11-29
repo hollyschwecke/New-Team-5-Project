@@ -361,7 +361,7 @@ def main_product():
     return render_template('mainproductlist.html', products=Products)
 
 
-@app.route('/addproduct')
+@app.route('/addproduct', methods=['POST'])
 def adding_product():
     # get form data
     name = request.form['product-name']
@@ -405,7 +405,7 @@ def adding_product():
     conn.commit()
     conn.close()
     
-    return render_template('addproduct.html') #, success=True)
+    return render_template('addproduct.html', success=True)
 
 
 @app.route('/createaccount', methods=['GET', 'POST'])
