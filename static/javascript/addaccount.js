@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     formData.append("quantity", quantityInput.value);
     
     try {
-      const response = await fetch("backend url", {
+      const response = await fetch('/addproduct', {
         method: "POST",
           body: formData,
       });
