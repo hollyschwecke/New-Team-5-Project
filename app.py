@@ -306,9 +306,9 @@ def searching():
             parameters.extend([f'%{search_term}%', f'%{search_term}%'])
         if filter_category:
             if 'WHERE' in query:
-                query += " AND p.category = ?"
+                query += " AND Products.category = ?"
             else:
-                query += " WHERE p.category = ?"
+                query += " WHERE Products.category = ?"
             parameters.append(filter_category)
 
     # Execute the query
