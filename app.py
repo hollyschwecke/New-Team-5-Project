@@ -318,6 +318,10 @@ def searching():
         results = cur.fetchall()
         cur.close()
         return render_template("searchpage.html", results=results)
+    
+    except Exception as e:
+        print(f"Database error: {e}")
+        return "An error occurred while processing your request.", 500
 
 
 @app.route('/mainproductlist')
