@@ -326,25 +326,31 @@ def searching():
 
 @app.route('/mainproductlist')
 def main_product():
-    # Connect to the database
-    #conn = sqlite3.connect('petstore.db')
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    cursor = conn.cursor()
+    try:
+        # Connect to the database
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+        
+        # Fetch all products and their images
+        query = '''
+            SELECT p.product_id, p.name, p.description, p.price, p.category_id, 
+                   p.stock_quantity, p.date_added, 
+                   STRING_AGG(pi.image_path, ',') AS images
+            FROM Products p
+            LEFT JOIN ProductImages pi ON pi.product_id = p.product_id
+            GROUP BY p.product_id
+        '''
+        
+        with conn:
+            with conn.cursor() as cursor:
+                cursor.execute(query)
+                products = cursor.fetchall()
+        
+        # Pass products to the HTML 
+        return render_template('mainproductlist.html', products=products)
 
-    # Fetch all products and their images
-    cursor.execute('''
-        SELECT product_id, name, description, price, category_id, stock_quantity, date_added, 
-               GROUP_CONCAT(ProductImages.image_path) AS images
-        FROM Products 
-        LEFT JOIN ProductImages ON id = product_id
-        GROUP BY id
-    ''')
-    products = cursor.fetchall()
-    conn.commit()
-    conn.close()
-
-    # Pass products to the HTML 
-    return render_template('mainproductlist.html', products=Products)
+    except Exception as e:
+        print(f"Database error: {e}")
+        return "An error occurred while processing your request.", 500
 
 
 @app.route('/addproduct', methods=['GET', 'POST'])
