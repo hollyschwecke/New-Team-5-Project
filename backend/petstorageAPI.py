@@ -15,130 +15,142 @@ Usage:
 """
 
 from flask import Flask, request, jsonify
-import sqlite3
+import psycopg2
 
 app = Flask(__name__)
 
-def create(db_filename):
+
+def create(db_connection_params):
     """
-    Create a SQLite database with the following tables:
+    Create a PostgreSQL database with the following tables:
         - Products
-        - Catagories
-        - Suppliers 
+        - Categories
+        - Suppliers
         - Inventory
         - Orders
         - Users
-    """ 
-    conn = sqlite3.connect(db_filename) # Connect to the database
-    c = conn.cursor() # Create a cursor object to execute SQL commands
+    """
+    conn = psycopg2.connect(**db_connection_params)  # Connect to PostgreSQL
+    c = conn.cursor()  # Create a cursor object to execute SQL commands
 
     # Create the Products table
-    c.execute('''CREATE TABLE IF NOT EXISTS Products (
-                        product_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        description TEXT,
-                        price REAL NOT NULL,
-                        category_id INTEGER,
-                        supplier_id INTEGER,
-                        stock_quantity INTEGER,
-                        date_added TEXT,
-                        FOREIGN KEY (category_id) REFERENCES Categories (category_id),
-                        FOREIGN KEY (supplier_id) REFERENCES Suppliers (supplier_id)
-                    )''')
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Products (
+            product_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            description TEXT,
+            price REAL NOT NULL,
+            category_id INTEGER,
+            supplier_id INTEGER,
+            stock_quantity INTEGER,
+            date_added DATE,
+            FOREIGN KEY (category_id) REFERENCES Categories (category_id),
+            FOREIGN KEY (supplier_id) REFERENCES Suppliers (supplier_id)
+        )
+    ''')
 
     # Create the ProductImages table
-    c.execute('''CREATE TABLE IF NOT EXISTS ProductImages (
-                        image_id INTERGER PRIMARY KEY AUTOINCREMENT
-                        product_id INTEGER,
-                        image_path TEXT,
-                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
-                    )''')
-    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS ProductImages (
+            image_id SERIAL PRIMARY KEY,
+            product_id INTEGER,
+            image_path TEXT,
+            FOREIGN KEY (product_id) REFERENCES Products (product_id)
+        )
+    ''')
+
     # Create the Categories table
-    c.execute('''CREATE TABLE IF NOT EXISTS Categories (
-                        category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL
-                        description TEXT
-                    )''')
-    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Categories (
+            category_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            description TEXT
+        )
+    ''')
+
     # Create the Suppliers table
-    c.execute('''CREATE TABLE IF NOT EXISTS Suppliers (
-                        supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT NOT NULL,
-                        email TEXT NOT NULL,
-                        phone TEXT NOT NULL
-                    )''')
-    
-    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Suppliers (
+            supplier_id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            phone TEXT NOT NULL
+        )
+    ''')
+
     # Create the Inventory table
-    c.execute('''CREATE TABLE IF NOT EXISTS Inventory (
-                        product_id INTEGER PRIMARY KEY,
-                        stock_quantity INTEGER NOT NULL,
-                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
-                    )''')
-    
-    #Create the Orders table
-    c.execute('''CREATE TABLE IF NOT EXISTS Orders (
-                        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        user_id INTEGER,
-                        product_id INTEGER,
-                        quantity INTEGER,
-                        date TEXT,
-                        FOREIGN KEY (user_id) REFERENCES Users (user_id),
-                        FOREIGN KEY (product_id) REFERENCES Products (product_id)
-                    )''')
-    
-    
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Inventory (
+            product_id INTEGER PRIMARY KEY,
+            stock_quantity INTEGER NOT NULL,
+            FOREIGN KEY (product_id) REFERENCES Products (product_id)
+        )
+    ''')
+
+    # Create the Orders table
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Orders (
+            order_id SERIAL PRIMARY KEY,
+            user_id INTEGER,
+            product_id INTEGER,
+            quantity INTEGER,
+            date DATE,
+            FOREIGN KEY (user_id) REFERENCES Users (user_id),
+            FOREIGN KEY (product_id) REFERENCES Products (product_id)
+        )
+    ''')
+
     # Create the Users table
-    c.execute('''CREATE TABLE IF NOT EXISTS Users (
-                        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT NOT NULL,
-                        password TEXT NOT NULL,
-                        email TEXT NOT NULL,
-                        role TEXT NOT NULL
-                    )''')
-    
-    conn.commit() # Commit the changes
-    conn.close() # Close the connection
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS Users (
+            user_id SERIAL PRIMARY KEY,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL,
+            email TEXT NOT NULL,
+            role TEXT NOT NULL
+        )
+    ''')
+
+    conn.commit()  # Commit the changes
+    conn.close()  # Close the connection
 
 
-def fill(db_filename):
-    conn = sqlite3.connect(db_filename)
+def fill(db_connection_params):
+    conn = psycopg2.connect(**db_connection_params) # Connect to PostgreSQL, the star operator unpacks the dictionary
     c = conn.cursor()
-    
-    #category information inserted into Categories table except ID which is auto-generated and autoicremented
-    categories = [
-        ('Food','Items for consumption'), 
-        ('Hygiene_Items','Personal care products'), 
-        ('Clothing','Apparel'),
-        ('Toys','Entertainment'),
-        ('Basic Needs','Home Furnishings, dishes, etc.')
-    ]
-    c.executemany("INSERT OR IGNORE INTO Categories (name, description) VALUES (?, ?)", categories)
 
-    #supplier information inserted into the Suppliers table except ID which is autogenerated and autoincremented
+    # Insert category data into Categories table
+    categories = [
+        ('Food', 'Items for consumption'),
+        ('Hygiene_Items', 'Personal care products'),
+        ('Clothing', 'Apparel'),
+        ('Toys', 'Entertainment'),
+        ('Basic Needs', 'Home Furnishings, dishes, etc.')
+    ]
+    c.executemany("INSERT INTO Categories (name, description) VALUES (%s, %s) ON CONFLICT (name) DO NOTHING", categories)
+
+    # Insert supplier data into Suppliers table
     suppliers = [
         ('LovePets', 'lovepets@lovepets.com', '5558923656'),
         ('PetGrub', 'petgrub@petgrub.com', '5559437783'),
         ('ToyTime', 'toytime@toytime.com', '5558127623'),
         ('PetFurniture', 'petfurniture@petfurniture.com', '5556753344'),
-        ('BowlsNow', 'bowlsnow@bowlsnow.com', '5559724976'),
+        ('BowlsNow', 'bowlsnow@bowlsnow.com', '5559724976')
     ]
-    c.executemany("INSERT OR REPLACE INTO Suppliers (name, email, phone) VALUES (?, ?, ?)", suppliers)
+    c.executemany("INSERT INTO Suppliers (name, email, phone) VALUES (%s, %s, %s) ON CONFLICT (name) DO NOTHING", suppliers)
 
-    #product information inserted into the Product table except ID which is autogenerated and autoincremented
+    # Insert product data into Products table
     products = [
-        ('DogFood', 12.50, 'dry dog food', 10, 3-12-2024 ),
-        ('WaterBowl', 5.00, 'bowl', 12, 5-10-2024),
-        ('Jacket', 10.00, 'clothing', 3, 10-12-2024)
+        ('DogFood', 12.50, 'dry dog food', 1, 1, 100, '2024-03-12'),
+        ('WaterBowl', 5.00, 'bowl', 2, 2, 50, '2024-05-10'),
+        ('Jacket', 10.00, 'clothing', 3, 3, 30, '2024-10-12')
     ]
-    for name, description, price, category_id, supplier_id, stock_quantity, date_added in products:
-        c.execute('''
-            INSERT  OR REPLACE INTO Products (name, description, price, category_id, supplier_id, stock_quantity, date_added)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (name, description, price, category_id, supplier_id, stock_quantity, date_added))
+    c.executemany('''
+        INSERT INTO Products (name, description, price, category_id, supplier_id, stock_quantity, date_added)
+        VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (name) DO NOTHING
+    ''', products)
 
-    #user information inserted into the Users table except ID which is autogenerated and autoincremented
+    # Insert user data into Users table
     users = [
         ('admin', 'admin123', 'admin@example.com', 'admin'),
         ('john_doe', 'password123', 'john@example.com', 'customer'),
@@ -146,74 +158,71 @@ def fill(db_filename):
         ('supplier_01', 'supplypass', 'supplier01@example.com', 'supplier'),
     ]
     c.executemany('''
-        INSERT OR IGNORE INTO Users (username, password, email, role)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO Users (username, password, email, role)
+        VALUES (%s, %s, %s, %s) ON CONFLICT (username) DO NOTHING
     ''', users)
-    
-    #inventory information inserted into the Inventory table except ID which is autogenerated and autoincremented
+
+    # Insert inventory data into Inventory table
     inventory = [
         (1, 100),  # DogFood with 100 units in stock
-        (3, 50),   # WaterBowl with 50 units in stock
-        (4, 30)   # Jacket with 30 units in stock
+        (2, 50),   # WaterBowl with 50 units in stock
+        (3, 30)    # Jacket with 30 units in stock
     ]
     c.executemany('''
-        INSERT OR IGNORE INTO Inventory (product_id, stock_quantity)
-        VALUES (?, ?)
+        INSERT INTO Inventory (product_id, stock_quantity)
+        VALUES (%s, %s) ON CONFLICT (product_id) DO NOTHING
     ''', inventory)
 
-    #order information inserted into the Orders table except ID which is autogenerated and autoincremented
+    # Insert order data into Orders table
     orders = [
-        (2, 1, 2, '2024-02-01'),  # User 2 ordered 2 DogFood
-        (3, 4, 1, '2024-02-03'),  
-        (2, 5, 3, '2024-02-05'), 
+        (2, 1, 2, '2024-02-01'),
+        (3, 2, 1, '2024-02-03'),
+        (2, 3, 3, '2024-02-05')
     ]
     c.executemany('''
-        INSERT OR IGNORE INTO Orders (user_id, product_id, quantity, date)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO Orders (user_id, product_id, quantity, date)
+        VALUES (%s, %s, %s, %s) ON CONFLICT (order_id) DO NOTHING
     ''', orders)
 
-    #productimage information inserted into the ProductImages table except ID which is autogenerated and autoincremented
+    # Insert product image data into ProductImages table
     product_images = [
-        (1, '../images/dogfood.png'),  # Image for DogFood
-        (2, '../images/waterbowl.png'),  # Image for WaterBowl
-        (3, '../images/jacket.png'),  # Image for Jacket
+        (1, '../images/dogfood.png'),
+        (2, '../images/waterbowl.png'),
+        (3, '../images/jacket.png')
     ]
     c.executemany('''
-        INSERT OR IGNORE INTO ProductImages (product_id, image_path)
-        VALUES (?, ?)
+        INSERT INTO ProductImages (product_id, image_path)
+        VALUES (%s, %s) ON CONFLICT (product_id) DO NOTHING
     ''', product_images)
-
 
     conn.commit()
     conn.close()
 
-def select(db_filename, table_name, columns='*', where_clause=None, params=()):
+
+def select(db_connection_params, table_name, columns='*', where_clause=None, params=()):
     """
     Fetch data from a specified table in the database.
 
     Args:
-        db_filename (str): The database filename.
-        table_name (str): The name of the table to query.
-        columns (str or list): The columns to retrieve, '*' for all columns (default).
+        db_connection_params (dict): The connection parameters for PostgreSQL.
+        table_name (str): The name of the table to query
+        columns (str or list): The columns to retrieve, '*' for all columns
         where_clause (str, optional): SQL WHERE clause without 'WHERE' (default: None).
         params (tuple, optional): Parameters for the WHERE clause (default: empty tuple).
 
     Returns:
         list of tuples: The rows retrieved from the table.
     """
-    conn = sqlite3.connect(db_filename)
+    conn = psycopg2.connect(**db_connection_params)
     c = conn.cursor()
 
-    # Convert list of columns to a comma-separated string
     if isinstance(columns, list):
         columns = ', '.join(columns)
 
-    # Build the query
     query = f"SELECT {columns} FROM {table_name}"
     if where_clause:
         query += f" WHERE {where_clause}"
 
-    # Execute the query
     c.execute(query, params)
     results = c.fetchall()
 
@@ -221,12 +230,56 @@ def select(db_filename, table_name, columns='*', where_clause=None, params=()):
     conn.close()
     return results
 
-#drop table so there are no duplicates when calling
-def drop(db_filename):
-    conn = sqlite3.connect(db_filename)
+def add_product(db_connection_params, name, description, price, category_id, supplier_id, stock_quantity):
+    # Input validation
+    if not name:
+        raise ValueError("Product name cannot be empty")
+    if not description:
+        raise ValueError("Product description cannot be empty")
+    if price < 0:
+        raise ValueError("Product price cannot be negative")
+    if stock_quantity < 0:
+        raise ValueError("Product quantity cannot be negative")
+    
+    try:
+        # Connect to the PostgreSQL database using db_params
+        conn = psycopg2.connect(**db_connection_params)  # Unpack db_params dictionary
+        cursor = conn.cursor()
+
+        # Prepare the SQL query to insert a new product into the Products table
+        query = '''
+            INSERT INTO Products (name, description, price, category_id, supplier_id, stock_quantity) 
+            VALUES (%s, %s, %s, %s, %s, %s) 
+            RETURNING product_id;
+        '''
+        
+        # Execute the query with the provided values
+        cursor.execute(query, (name, description, price, category_id, supplier_id, stock_quantity))
+        
+        # Fetch the product_id of the newly inserted product
+        product_id = cursor.fetchone()[0]
+
+        # Commit the transaction
+        conn.commit()
+        
+        # Close the cursor and connection
+        cursor.close()
+        conn.close()
+
+        # Return the product_id of the newly added product
+        return product_id
+   
+    except psycopg2.Error as e:
+        # This block handles any exception raised by psycopg2
+        print(f"An error occurred: {e}")
+        raise 
+
+
+def drop(db_connection_params):
+    conn = psycopg2.connect(**db_connection_params)
     c = conn.cursor()
 
-    #tables to drop
+    # Drop each table
     tables = [
         "ProductImages",
         "Products",
@@ -236,19 +289,20 @@ def drop(db_filename):
         "Orders",
         "Users"
     ]
-
-    # drop each table
     for table in tables:
-        c.execute(f"DROP TABLE IF EXISTS {table}")
+        c.execute(f"DROP TABLE IF EXISTS {table} CASCADE")
 
     conn.commit()
     conn.close()
 
 
-
 if __name__ == '__main__':
-    db_filename = 'petstore.db'
-    create(db_filename)
-    fill(db_filename)
-    select(db_filename)
-    # drop(db_filename) 
+    db_connection_params = {
+    'host': 'dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com',
+    'database': 'schwecke_lab10_database',
+    'user': 'schwecke_lab10_database_user',
+    'password': '4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA'
+    }
+    create(db_connection_params)
+    fill(db_connection_params)
+    # drop(db_connection_params)
