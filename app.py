@@ -430,7 +430,8 @@ def creating_main_page():
     return render_template('main_page.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3308)
+    # app.run(host="0.0.0.0", port=3308)
+    app.run(debug=True)
     # db_filename = 'petstore.db'
     # create(db_filename)
     # fill(db_filename)
