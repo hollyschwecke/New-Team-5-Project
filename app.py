@@ -2,6 +2,7 @@
 # Purpose: Create routes for Flask application to connect pages and databases
 # Usage: utilize imported packages, the petstore.db, and functions to be able to connect the databases to the proper pages
 import psycopg2
+import os
 # import petstorageAPI
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
@@ -281,62 +282,43 @@ def logging_in():
         return render_template('login.html', message=message)
     
 
-@app.route('/search')
+
+
+@app.route('/search', methods=['GET', 'POST'])
 def searching():
-    #conn = sqlite3.connect('petstore.db')
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    cur = conn.cursor()
+    try:
+        conn = psycopg2.connect(os.getenv("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database"))
+        cur = conn.cursor()
 
-    # Default query to fetch all products
-    query = '''
-        SELECT product_id, name, description, price, category_id, stock_quantity, date_added, ProductImages.image_path
-        FROM Products 
-        LEFT JOIN ProductImages ON id = product_id
-    '''
-    parameters = []
+        # Default query to fetch all products
+        query = '''
+            SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, i.image_path
+            FROM Products p
+            LEFT JOIN ProductImages i ON i.product_id = p.product_id
+        '''
+        parameters = []
 
-    # Handle user input for searching or filtering
-    if request.method == 'POST':
-        search_term = request.form.get('search', '').strip()
-        filter_category = request.form.get('category', '').strip()
+        # Handle user input for searching or filtering
+        if request.method == 'POST':
+            search_term = request.form.get('search', '').strip()
+            filter_category = request.form.get('category', '').strip()
 
-        # Build query based on inputs
-        if search_term:
-            query += " WHERE p.name LIKE ? OR p.description LIKE ?"
-            parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-        if filter_category:
-            if 'WHERE' in query:
-                query += " AND Products.category = ?"
-            else:
-                query += " WHERE Products.category = ?"
-            parameters.append(filter_category)
+            # Build query based on inputs
+            if search_term:
+                query += " WHERE p.name LIKE %s OR p.description LIKE %s"
+                parameters.extend([f'%{search_term}%', f'%{search_term}%'])
+            if filter_category:
+                if 'WHERE' in query:
+                    query += " AND p.category_id = %s"
+                else:
+                    query += " WHERE p.category_id = %s"
+                parameters.append(filter_category)
 
-    # Execute the query
-    cur.execute(query, parameters)
-    products = cur.fetchall()
-    conn.close()
+        cur.execute(query, parameters)
+        results = cur.fetchall()
+        cur.close()
+        return render_template("searchpage.html", results=results)
 
-    # Process results to group images for each product
-    grouped_products = {}
-    for product in products:
-        product_id = product[0]
-        if product_id not in grouped_products:
-            grouped_products[product_id] = {
-                'id': product_id,
-                'name': product[1],
-                'description': product[2],
-                'price': product[3],
-                'category': product[4],
-                'available_quantity': product[5],
-                'date_added': product[6],
-                'images': []
-            }
-        if product[7]:  # Add image if it exists
-            grouped_products[product_id]['images'].append(product[7])
-
-    final_products = list(grouped_products.values())
-
-    return render_template('searchpage.html', Products=final_products)
 
 @app.route('/mainproductlist')
 def main_product():
