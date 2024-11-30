@@ -412,7 +412,7 @@ def creating_account():
         try:
             cursor.execute('''
                 INSERT INTO Users (username, password, email, date_created)
-                VALUES (?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s)
             ''', (username, password, email, date_created))
             conn.commit()
             conn.close()
