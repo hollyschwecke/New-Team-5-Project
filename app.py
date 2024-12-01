@@ -274,7 +274,12 @@ def logging_in():
 @app.route('/search', methods=['GET', 'POST'])
 def searching():
     try:
-        conn = psycopg2.connect(os.getenv("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database"))
+        DATABASE_URL = os.getenv("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+
+        if not DATABASE_URL:
+            raise ValueError("The DATABASE_URL environment variable isn't set")
+        
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
 
         # Default query to fetch all products
@@ -303,12 +308,20 @@ def searching():
 
         cur.execute(query, parameters)
         results = cur.fetchall()
-        cur.close()
+
         return render_template("searchpage.html", results=results)
     
+    except psycopg2.Error as db_error:
+        print(f"Database error: {db_error}")
+        return "An error with the database has occurred while processing your request"
+
     except Exception as e:
         print(f"Database error: {e}")
         return "An error occurred while processing your request.", 500
+    
+    finally:
+        cur.close()
+        conn.close()
 
 
 @app.route('/mainproductlist')
