@@ -30,7 +30,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     .then(data => {
         if (data.success) {
             alert("Login successful!");
-            window.location.href = '../templates/searchpage.html';
+            window.location.href = '/search';
         } else {
             alert("Invalid credentials.");
         }
