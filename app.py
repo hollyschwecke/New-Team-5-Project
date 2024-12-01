@@ -243,7 +243,7 @@ def check_user_credentials(username, password):
     cur = conn.cursor()
 
     #query database
-    cur.execute("SELECT * FROM Users WHERE username = ? AND password = ?", (username, password))
+    cur.execute("SELECT * FROM Users WHERE username = %s AND password = %s", (username, password))
     user = cur.fetchone()
 
     conn.close()
@@ -251,19 +251,22 @@ def check_user_credentials(username, password):
 
 
 # handles login authentication
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def logging_in():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    # check login credentials against database
-    user = check_user_credentials(username, password)
+        # check login credentials against database
+        user = check_user_credentials(username, password)
 
-    if user:
-        return redirect(url_for('searching', username=username)) # user exists
-    else:
-        message = "Invalid username or password"
-        return render_template('login.html', message=message)
+        if user:
+            return redirect(url_for('searching', username=username)) # user exists
+        else:
+            message = "Invalid username or password"
+            return render_template('login.html', message=message)
+        
+    return render_template("login.html")
     
 
 
