@@ -6,7 +6,7 @@ Usage: utilize the HTML and CSS files that are linked to the login page to adjus
 
 //Create account button click function added that links to create account page and clears session data
 document.getElementById('creaccntbutton').addEventListener('click', function() {
-    window.location.href = '../templates/createaccount.html';
+    window.location.href = '/createaccount';
 });
 
 // listens for login form submit button and prevents refreshing the page right away, instead goes to javascript
