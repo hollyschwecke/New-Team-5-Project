@@ -7,6 +7,7 @@ Usage: utilize the HTML and CSS files that are linked to the create account page
 // listens for create account form submit button and prevents refreshing the page right away, instead goes to javascript
 document.getElementById("createForm").addEventListener("submit", function(event) {
     // event.preventDefault();
+    window.location.href = '/login';
 
     // Get data from form (email, username, and password)
     const email = document.getElementById("email").value;
