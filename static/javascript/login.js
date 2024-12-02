@@ -11,7 +11,7 @@ document.getElementById('creaccntbutton').addEventListener('click', function() {
 
 // listens for login form submit button and prevents refreshing the page right away, instead goes to javascript
 document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     // Get data from form (username and password)
     const username = document.getElementById("username").value;
