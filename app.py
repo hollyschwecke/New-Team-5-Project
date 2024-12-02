@@ -252,7 +252,7 @@ def check_user_credentials(username, password):
 
 # handles login authentication
 @app.route('/login', methods=['GET', 'POST'])
-def logging_in():
+def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
@@ -261,7 +261,7 @@ def logging_in():
         user = check_user_credentials(username, password)
 
         if user:
-            return redirect(url_for('searching', username=username)) # user exists
+            return redirect(url_for('search', username=username)) # user exists
         else:
             message = "Invalid username or password"
             return render_template('login.html', message=message)
@@ -271,7 +271,7 @@ def logging_in():
 
 
 @app.route('/search', methods=['GET', 'POST'])
-def searching():
+def search():
     conn = None
     cur = None
     try:
@@ -422,7 +422,7 @@ def creating_account():
             ''', (username, password, email, date_created))
             conn.commit()
             conn.close()
-            return redirect(url_for('logging_in'))
+            return redirect(url_for('login'))
         except Exception as e:
             conn.rollback()
             conn.close()
