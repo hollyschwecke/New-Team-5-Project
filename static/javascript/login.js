@@ -28,6 +28,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     // procceses the response from server and sees if it is successful
     .then(response => response.json())
     .then(data => {
+        console.log('Response from server:', data);
         if (data.success) {
             alert("Login successful!");
             window.location.href = '/search';
