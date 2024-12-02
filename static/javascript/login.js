@@ -26,17 +26,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         body: JSON.stringify({ username, password })
     })
     // procceses the response from server and sees if it is successful
-    .then(response => response.json())
-    .then(data => {
-        console.log('Response from server:', data);
-        if (data.success) {
-            alert("Login successful!");
-            window.location.href = '/search';
-        } else {
-            alert("Invalid credentials.");
-        }
+    .then(response => {
+    console.log('Response Status:', response.status);  // Log the status code
+    return response.json(); // Attempt to parse JSON
     })
-    // if any errors, logs them to the console (debugging use)
+    .then(data => {
+        console.log('Data:', data); // Verify the JSON response
+    })
     .catch(error => {
         console.error('Error:', error);
     });
