@@ -268,6 +268,29 @@ def login():
     return render_template("login.html")
     
 
+# Product model for search and mainproductlist routes
+class Product(db.Model):
+    __tablename__ = 'products'
+    product_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
+    price = db.Column(db.Float, nullable=False)
+
+# API to fetch products
+@app.route('/api/products')
+def get_products():
+    products = Product.query.all()
+    product_list = [
+        {
+            'product_id': product.product_id,
+            'name': product.name,
+            'description': product.description,
+            'price': product.price
+        }
+        for product in products
+    ]
+    return jsonify(product_list)
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
