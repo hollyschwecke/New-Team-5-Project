@@ -6,7 +6,6 @@ import os
 # import petstorageAPI
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
-import sqlite3
 
 app = Flask(__name__)
 
@@ -443,9 +442,9 @@ def creating_main_page():
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=3308)
-    app.run(debug=True)
-    # db_filename = 'petstore.db'
-    # create(db_filename)
-    # fill(db_filename)
-    # select(db_filename)
+    # app.run(debug=True)
+    db_filename = 'petstore.db'
+    create(db_filename)
+    fill(db_filename)
+    select(db_filename)
     # drop(db_filename) 
