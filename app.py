@@ -48,7 +48,7 @@ def create(db_filename):
     
     # Create the Categories table
     c.execute('''CREATE TABLE IF NOT EXISTS Categories (
-                        category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        category_id INTEGER PRIMARY KEY,
                         name TEXT NOT NULL,
                         description TEXT
                     )''')
