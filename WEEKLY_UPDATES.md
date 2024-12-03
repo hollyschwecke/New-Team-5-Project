@@ -74,3 +74,10 @@ Claire, Therese, and Holly met together to record the Agile meeting.
    - Claire: Working on connecting database to web hosting and the presentation slides.
    - Therese: Working on connecting the database to the web hosting and the presentation slides.
 ![image](./images/Week13.png)
+
+## Week 14
+ Claire, Therese, and Holly met together in their meeting, adjusted for the Thanksgiving holiday. At their next meeting they will record the project demo.
+   - Holly: Working on final touches with webpages and hosting for her pages. She is also working on making some presentation slides.
+   - Claire: Working on connecting database to web hosting and the final touches of web hosting.
+   - Therese: Working on the presentation slides.
+
