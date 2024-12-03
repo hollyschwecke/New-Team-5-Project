@@ -272,9 +272,18 @@ def login():
 def search():
     conn = None
     cur = None
+    username = None
     try:
         conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
+
+        # Fetch the username from the database (assuming user_id is stored in session)
+        user_id = 1  # In practice, replace with session or user-specific ID
+        cur.execute('SELECT username FROM users WHERE id = %s', (user_id,))
+        user = cur.fetchone()
+        
+        if user:
+            username = user[0]  # Extract username from the result
 
         # Default query to fetch all products
         query = '''
@@ -319,7 +328,7 @@ def search():
         if conn:
             conn.close()
 
-    return render_template("searchpage.html", results=results)
+    return render_template("searchpage.html", results=results, username=username)
 
 
 
