@@ -12,15 +12,8 @@ Usage: utilize the HTML and CSS files that are linked to the  product list page 
 //Sign Out button click function added that links to login page and clears session data
 document.getElementById('signOutButton').addEventListener('click', function() {
     sessionStorage.clear();
-    window.location.href = '../login.html';
+    window.location.href = '/login';
 });
-
-//function that retrieves username from DB, stores username in session and updates the display
-function loginUser() {
-    const username = "JaneDoe"; 
-    sessionStorage.setItem('username', username);
-    displayUsername();
-}
 
 // Function to display the username by getting the item from the current session and displaying it with welcome text
 function displayUsername() {
@@ -34,66 +27,81 @@ function displayUsername() {
         .then(response => response.json())
         .then(data => {
             // Insert the username into the #usernameDisplay div
-            document.getElementById('usernameDisplay').textContent = `Welcome, ${data.username}`;
+            sessionStorage.setItem('username', data.username);
+            usernameDisplay.textContent = `Welcome, ${data.username}`;
         })
         .catch(error => console.error('Error fetching username:', error));
     }
 }
 
-// Call function to simulate logging in (DEMO PURPOSES ONLY)
-// loginUser();
-// displayUsername();
+// Call displayUsername to initialize username display
+displayUsername();
 
-
-//Search bar filtering
-const data = [
-    { name: "Item 1", category: "Category 1" },
-    { name: "Item 2", category: "Category 2" },
-    { name: "Item 3", category: "Category 3" },
-    { name: "Item 4", category: "Category 4" },
-    { name: "Item 5", category: "Category 5" },
-];
-
-const filterImage = document.getElementById('filterImage');
-const dropdown = document.getElementById('dropdown');
-
-filterImage.addEventListener('click', function() {
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none'; // Toggle dropdown
-});
-
-dropdown.addEventListener('click', function(event) {
-    const selectedValue = event.target.getAttribute('data-value');
-    if (selectedValue) {
-        document.getElementById('filterSelect').value = selectedValue; // Update the dropdown value
-        dropdown.style.display = 'none'; // Hide dropdown after selection
+// Fetch products from the server
+async function fetchProducts() {
+    try {
+        const response = await fetch('/api/products');
+        if (!response.ok) {
+            throw new Error('Failed to fetch products');
+        }
+        const products = await response.json();
+        displayResults(products); // Display products dynamically
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        const resultsContainer = document.getElementById('resultsContainer');
+        resultsContainer.innerHTML = '<p>Error loading products. Please try again later.</p>';
     }
-});
+}
 
+// Filter and search functionality
 document.getElementById('searchButton').addEventListener('click', function() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const selectedFilter = document.getElementById('filterSelect').value;
 
-    const filteredResults = data.filter(item => {
-        const matchesQuery = item.name.toLowerCase().includes(query);
-        const matchesFilter = selectedFilter === "" || item.category === selectedFilter;
-        return matchesQuery && matchesFilter;
-    });
+    fetch('/api/products')
+        .then(response => response.json())
+        .then(products => {
+            const filteredResults = products.filter(product => {
+                const matchesQuery = product.name.toLowerCase().includes(query);
+                const matchesFilter =
+                    selectedFilter === "" || 
+                    (selectedFilter === "Alphabetically" && product.name) || 
+                    (selectedFilter === "Price: Low to High" && product.price >= 0) || 
+                    (selectedFilter === "Price: High to Low" && product.price <= Infinity); 
+                return matchesQuery && matchesFilter;
+            });
 
-    displayResults(filteredResults);
+            displayResults(filteredResults);
+        })
+        .catch(error => {
+            console.error('Error filtering products:', error);
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '<p>Error applying filter.</p>';
+        });
 });
 
-function displayResults(results) {
+// Display results in the results container
+function displayResults(products) {
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = ""; // Clear previous results
 
-    if (results.length === 0) {
+    if (products.length === 0) {
         resultsContainer.innerHTML = "<p>No results found.</p>";
         return;
     }
 
-    results.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.textContent = item.name + " (" + item.category + ")";
-        resultsContainer.appendChild(itemDiv);
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
+            <h3>${product.name}</h3>
+            <p>${product.description || 'No description available.'}</p>
+            <p><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+        `;
+        resultsContainer.appendChild(productCard);
     });
+}
+
+// Initialize the page by fetching and displaying products
+fetchProducts();
 }
