@@ -355,49 +355,54 @@ def main_product():
 
 @app.route('/addproduct', methods=['GET', 'POST'])
 def adding_product():
-    # get form data
-    name = request.form['product-name']
-    category = request.form['category']
-    price = float(request.form['price'])
-    description = request.form['description']
-    available_quantity = int(request.form['quantity'])
-    date_added = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if request.method == 'POST':
+        # get form data
+        name = request.form['product-name']
+        category = request.form['category']
+        price = float(request.form['price'])
+        description = request.form['description']
+        available_quantity = int(request.form['quantity'])
+        date_added = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    # handle image uploads
-    image_files = request.files.getlist('images')
-    image_paths = []
-    for img in image_files:
-        if img:
-            # save each image to a specific folder and store the file path
-            img_path = f"uploads/{img.filename}"
-            img.save(img_path)
-            image_paths.append(img_path)
+        # handle image uploads
+        image_files = request.files.getlist('images')
+        image_paths = []
+        for img in image_files:
+            if img:
+                # save each image to a specific folder and store the file path
+                img_path = f"uploads/{img.filename}"
+                img.save(img_path)
+                image_paths.append(img_path)
 
-    # create connection to db
-    #conn = sqlite3.connect('petstore.db')
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    cursor = conn.cursor()
+        # create connection to db
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+        cursor = conn.cursor()
 
-    # insert product data into products table
-    cursor.execute('''
-        INSERT INTO Products (name, description, price, category, available_quantity, date_added)
-        VALUES (%s, %s, %s, %s, %s, %s)
-        ''', (name, description, price, category, available_quantity, date_added))
-
-    # get id of last inserted product
-    product_id = cursor.fetchone()[0]
-
-    # insert image paths into the ProductImages table
-    for img_path in image_paths:
+        # insert product data into products table
         cursor.execute('''
-            INSERT INTO ProductImages (product_id, image_path)
-            VALUES (%s, %s)
-            ''', (product_id, img_path))
+            INSERT INTO Products (name, description, price, category, available_quantity, date_added)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ''', (name, description, price, category, available_quantity, date_added))
 
-    conn.commit()
-    conn.close()
+        # get id of last inserted product
+        cursor.execute("SELECT lastval()")
+        product_id = cursor.fetchone()[0]
+
+        # insert image paths into the ProductImages table
+        for img_path in image_paths:
+            cursor.execute('''
+                INSERT INTO ProductImages (product_id, image_path)
+                VALUES (%s, %s)
+                ''', (product_id, img_path))
+
+        # commit changes and close connection
+        conn.commit()
+        conn.close()
     
-    return redirect(url_for('addproduct.html'))
+        return redirect(url_for('addproduct.html'))
+
+    # display form when GET request is made
+    return render_template('addproduct.html') 
 
 
 @app.route('/createaccount', methods=['GET', 'POST'])
