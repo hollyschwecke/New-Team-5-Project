@@ -269,12 +269,12 @@ def login():
     
 
 # Product model for search and mainproductlist routes
-class Product(db.Model):
+class Product(db_filename.Model):
     __tablename__ = 'products'
-    product_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=True)
-    price = db.Column(db.Float, nullable=False)
+    product_id = db_filename.Column(db_filename.Integer, primary_key=True)
+    name = db_filename.Column(db_filename.String(255), nullable=False)
+    description = db_filename.Column(db_filename.String(255), nullable=True)
+    price = db_filename.Column(db_filename.Float, nullable=False)
 
 # API to fetch products
 @app.route('/api/products')
