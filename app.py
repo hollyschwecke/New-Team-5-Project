@@ -281,7 +281,7 @@ def search():
         # Default query to fetch all products
         query = '''
             SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, i.image_path
-            FROM Products p
+            FROM products p
             LEFT JOIN Categories c ON p.category_id = c.category_id
             LEFT JOIN ProductImages i ON i.product_id = p.product_id
         '''
@@ -336,7 +336,7 @@ def main_product():
             SELECT p.product_id, p.name, p.description, p.price, p.category_id, 
                    p.stock_quantity, p.date_added, 
                    STRING_AGG(pi.image_path, ',') AS images
-            FROM Products p
+            FROM products p
             LEFT JOIN ProductImages pi ON pi.product_id = p.product_id
             GROUP BY p.product_id
         '''
