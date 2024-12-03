@@ -40,7 +40,7 @@ def create(db_filename):
 
     # Create the ProductImages table
     c.execute('''CREATE TABLE IF NOT EXISTS ProductImages (
-                        image_id INTEGER PRIMARY KEY AUTOINCREMENT
+                        image_id INTEGER PRIMARY KEY 
                         product_id INTEGER,
                         image_path TEXT,
                         FOREIGN KEY (product_id) REFERENCES Products (product_id)
@@ -55,7 +55,7 @@ def create(db_filename):
     
     # Create the Suppliers table
     c.execute('''CREATE TABLE IF NOT EXISTS Suppliers (
-                        supplier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        supplier_id INTEGER PRIMARY KEY,
                         name TEXT NOT NULL,
                         email TEXT NOT NULL,
                         phone TEXT NOT NULL
@@ -71,7 +71,7 @@ def create(db_filename):
     
     #Create the Orders table
     c.execute('''CREATE TABLE IF NOT EXISTS Orders (
-                        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        order_id INTEGER PRIMARY KEY,
                         user_id INTEGER,
                         product_id INTEGER,
                         quantity INTEGER,
@@ -83,7 +83,7 @@ def create(db_filename):
     
     # Create the Users table
     c.execute('''CREATE TABLE IF NOT EXISTS Users (
-                        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        user_id INTEGER PRIMARY KEY,
                         username TEXT NOT NULL,
                         password TEXT NOT NULL,
                         email TEXT NOT NULL,
