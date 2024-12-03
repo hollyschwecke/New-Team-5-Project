@@ -279,7 +279,7 @@ def search():
 
         # Fetch the username from the database (assuming user_id is stored in session)
         user_id = 1  # In practice, replace with session or user-specific ID
-        cur.execute('SELECT username FROM users WHERE id = %s', (user_id,))
+        cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
         user = cur.fetchone()
         
         if user:
