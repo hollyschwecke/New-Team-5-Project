@@ -1,0 +1,36 @@
+/* results container styling */
+#resultsContainer {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #a48c79ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* results item styling */
+#resultsContainer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* listed items stylings */
+#resultsContainer li {
+    background-color: #fcfcfcff;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #a48c79ff;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* hovering over list items styling */
+#resultsContainer li:hover {
+    transform: scale(1.03);
+}
+
+/* results image styling */
+#resultsContainer img {
+    max-width: 150px;
+    border-radius: 5px;
+}

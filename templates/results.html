@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="results.css">
     <title>Search Results</title>
 </head>
 <body>
+    <button id="signOutButton">Sign Out</button>
     <h1>Search Results</h1>
-
+    <div id="resultsContainer">
     {% if results %}
         <ul>
         {% for result in results %}
@@ -27,5 +29,6 @@
     {% endif %}
 
     <a href="/search">Go Back to Search</a>
+    </div>
 </body>
 </html>
