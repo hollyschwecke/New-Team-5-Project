@@ -482,7 +482,7 @@ def adding_product():
         conn.commit()
         conn.close()
     
-        return redirect(url_for('addproduct.html'))
+        return redirect(url_for('adding_product'))
 
     # display form when GET request is made
     return render_template('addproduct.html') 
