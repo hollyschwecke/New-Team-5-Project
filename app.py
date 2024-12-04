@@ -338,6 +338,14 @@ def search():
 
 @app.route('/search/results', methods=['POST'])
 def search_results():
+    if request.method == 'POST':
+        # Get search term and category filter from form
+        search_term = request.form.get('search', '').strip()
+        filter_category = request.form.get('category', '').strip()
+
+        # Redirect to the GET route with query parameters
+        return redirect(url_for('search_results', search=search_term, category=filter_category))
+    
     conn = None
     cur = None
     try:
