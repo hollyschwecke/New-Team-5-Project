@@ -179,16 +179,17 @@ def fill(db_filename):
     conn.commit()
     conn.close()
 
-def select(db_filename, table_name, columns='*', where_clause=None, params=()):
+def select(db_filename, table_name, columns='*', where_clause=None, params=(), order_by=None):
     """
     Fetch data from a specified table in the database.
 
     Args:
-        db_filename (str): The database filename.
+        db_filename (str): The database filename (not used since we connect directly).
         table_name (str): The name of the table to query.
         columns (str or list): The columns to retrieve, '*' for all columns (default).
         where_clause (str, optional): SQL WHERE clause without 'WHERE' (default: None).
         params (tuple, optional): Parameters for the WHERE clause (default: empty tuple).
+        order_by (str, optional): SQL ORDER BY clause without 'ORDER BY' (default: None).
 
     Returns:
         list of tuples: The rows retrieved from the table.
@@ -204,6 +205,8 @@ def select(db_filename, table_name, columns='*', where_clause=None, params=()):
     query = f"SELECT {columns} FROM {table_name}"
     if where_clause:
         query += f" WHERE {where_clause}"
+    if order_by:
+        query += f" ORDER BY {order_by}"
 
     # Execute the query
     c.execute(query, params)
