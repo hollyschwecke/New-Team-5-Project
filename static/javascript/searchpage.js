@@ -97,6 +97,7 @@ document.getElementById('searchButton').addEventListener('click', function () {
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
+    window.location.href = '/search/results';
 
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>No results found.</p>';
