@@ -284,11 +284,13 @@ def search():
         session = user_id
         user_id = session.get('user_id')
         
+        
         cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
         user = cur.fetchone()
         
         if user:
             username = user[0]  # Extract username from the result
+
 
         # Default query to fetch all products
         query = '''
@@ -299,34 +301,20 @@ def search():
         '''
         parameters = []
 
-        # Handle user input for searching or filtering
-        if request.method == 'POST':
-            return jsonify([
-        {
-            "product_id": row[0],
-            "name": row[1],
-            "description": row[2],
-            "price": float(row[3]),
-            "category_id": row[4],
-            "stock_quantity": row[5],
-            "date_added": row[6].isoformat(),
-            "image_path": row[7]
-        } for row in results
-    ])
-            # search_term = request.form.get('search', '').strip()
-            # filter_category = request.form.get('category', '').strip()
+        search_term = request.form.get('search', '').strip()
+        filter_category = request.form.get('category', '').strip()
 
-            # # Build query based on inputs
-            # where_clauses = []
-            # if search_term:
-            #     where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
-            #     parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-            # if filter_category:
-            #     where_clauses.append("p.category_id = %s")
-            #     parameters.append(filter_category)
+        # Build query based on inputs
+        where_clauses = []
+        if search_term:
+            where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
+            parameters.extend([f'%{search_term}%', f'%{search_term}%'])
+        if filter_category:
+            where_clauses.append("p.category_id = %s")
+            parameters.append(filter_category)
 
-            # if where_clauses:
-            #     query += " WHERE " + " AND ".join(where_clauses)
+        if where_clauses:
+            query += " WHERE " + " AND ".join(where_clauses)
 
         cur.execute(query, parameters)
         results = cur.fetchall()
@@ -347,7 +335,68 @@ def search():
 
     return render_template("searchpage.html", results=results, username=username)
 
+@app.route('/search/results', methods=['POST'])
+def search_results():
+    conn = None
+    cur = None
+    try:
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+        cur = conn.cursor()
 
+        # Get search term and category filter from form
+        search_term = request.form.get('search', '').strip()
+        filter_category = request.form.get('category', '').strip()
+
+        # Base query
+        query = '''
+            SELECT p.product_id, p.name, p.description, p.price, p.category_id, p.stock_quantity, p.date_added, i.image_path
+            FROM products p
+            LEFT JOIN categories c ON p.category_id = c.category_id
+            LEFT JOIN ProductImages i ON i.product_id = p.product_id
+        '''
+        parameters = []
+
+        # Apply filters
+        where_clauses = []
+        if search_term:
+            where_clauses.append("(p.name ILIKE %s OR p.description ILIKE %s)")
+            parameters.extend([f'%{search_term}%', f'%{search_term}%'])
+        if filter_category:
+            where_clauses.append("p.category_id = %s")
+            parameters.append(filter_category)
+
+        if where_clauses:
+            query += " WHERE " + " AND ".join(where_clauses)
+
+        cur.execute(query, parameters)
+        results = cur.fetchall()
+
+        # Map results to a dictionary for rendering
+        results_list = [
+            {
+                'product_id': row[0],
+                'name': row[1],
+                'description': row[2],
+                'price': row[3],
+                'category_id': row[4],
+                'stock_quantity': row[5],
+                'date_added': row[6],
+                'image_path': row[7],
+            }
+            for row in results
+        ]
+
+        return render_template('results.html', results=results_list)
+
+    except Exception as e:
+        print(f"Error during search: {str(e)}")
+        return "An error occurred during search.", 500
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
 @app.route('/mainproductlist')
 def main_product():

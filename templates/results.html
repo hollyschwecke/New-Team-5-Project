@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    {% if results %}
+        <ul>
+        {% for result in results %}
+            <li>
+                <h3>{{ result.name }}</h3>
+                <p>{{ result.description }}</p>
+                <p>Price: ${{ result.price }}</p>
+                <p>Stock: {{ result.stock_quantity }}</p>
+                <!-- {% if result.image_path %} -->
+                    <!-- <img src="{{ result.image_path }}" alt="{{ result.name }}" width="150"> -->
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found for your search.</p>
+    {% endif %}
+
+    <a href="/search">Go Back to Search</a>
+</body>
+</html>
