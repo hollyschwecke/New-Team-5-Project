@@ -33,33 +33,56 @@ function displayUsername() {
         })
         .catch(error => console.error('Error fetching username:', error));
 }
+}
 
-// Search bar functionality linked to the database
-document.getElementById('searchButton').addEventListener('click', function() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const selectedFilter = document.getElementById('filterSelect').value;
+document.getElementById('searchButton').addEventListener('click', function () {
+    const searchInput = document.getElementById('searchInput').value.trim();
+    const filterSelect = document.getElementById('filterSelect').value;
 
-    fetch(`/search?query=${encodeURIComponent(query)}&filter=${encodeURIComponent(selectedFilter)}`)
-        .then(response => response.json())
-        .then(data => {
-            displayResults(data);  // Display the products retrieved from the database
+    // Send a POST request to the /search route
+    fetch('/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            search: searchInput,
+            category: filterSelect,
+        }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
         })
-        .catch(error => console.error('Error fetching products:', error));
+        .then((data) => {
+            displayResults(data.results);
+        })
+        .catch((error) => {
+            console.error('Error fetching search results:', error);
+        });
 });
 
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
-    resultsContainer.innerHTML = ""; // Clear previous results
+    resultsContainer.innerHTML = ''; // Clear previous results
+    window.location.href = '/search/results';
 
     if (results.length === 0) {
-        resultsContainer.innerHTML = "<p>No results found.</p>";
+        resultsContainer.innerHTML = '<p>No results found.</p>';
         return;
     }
 
-    results.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.textContent = item.name + " (" + item.category + ")";
-        resultsContainer.appendChild(itemDiv);
+    results.forEach((result) => {
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result-item');
+        resultDiv.innerHTML = `
+            <h3>${result.name}</h3>
+            <p>${result.description}</p>
+            <p>Price: $${result.price}</p>
+            <p>Stock: ${result.stock_quantity}</p>
+        `;
+        resultsContainer.appendChild(resultDiv);
     });
-}
 }

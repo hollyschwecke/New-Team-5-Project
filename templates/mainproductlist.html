@@ -29,7 +29,10 @@ Usage: utilize the css file for the login page "mainproductlist.css", javascript
                 <div class="productheaderbox">
                     <h2>Products</h2>
                 </div>
-                    <input type="text" id="searchInput" placeholder="Searching...">
+                <form action="/search/results" method="POST">
+                    <label for="search">Searching:</label>
+                    <input type="text" id="searchInput" name="search">
+                    <!-- <input type="text" id="searchInput" placeholder="Searching..."> -->
                     <!-- <img id="filteredImage" src="./front_images/empty-filter-128.png" alt="Filtered Image"> -->
                     <select id="filterSelect">
                         <option value="">All</option>
