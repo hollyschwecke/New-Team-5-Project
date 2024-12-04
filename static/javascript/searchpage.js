@@ -66,18 +66,40 @@ dropdown.addEventListener('click', function(event) {
 });
 
 document.getElementById('searchButton').addEventListener('click', function() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const selectedFilter = document.getElementById('filterSelect').value;
+    const searchInput = document.getElementById('searchInput').value.trim();
+    const filterSelect = document.getElementById('filterSelect').value;
 
-    const filteredResults = data.filter(item => {
-        const matchesQuery = item.name.toLowerCase().includes(query);
-        const matchesFilter = selectedFilter === "" || item.category === selectedFilter;
-        return matchesQuery && matchesFilter;
+    // Create data object to send
+    const data = {
+        search: searchInput,
+        category: filterSelect
+    };
+
+    // Send POST request to the server
+    fetch('/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(results => {
+        displayResults(results);
+    })
+    .catch(error => {
+        console.error('Error during search:', error);
+        const resultsContainer = document.getElementById('resultsContainer');
+        resultsContainer.innerHTML = "<p>Error fetching search results. Please try again later.</p>";
     });
-
-    displayResults(filteredResults);
 });
 
+// Function to display the results
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = ""; // Clear previous results
@@ -89,7 +111,16 @@ function displayResults(results) {
 
     results.forEach(item => {
         const itemDiv = document.createElement('div');
-        itemDiv.textContent = item.name + " (" + item.category + ")";
+        itemDiv.className = "result-item";
+
+        // Customize display based on returned columns
+        itemDiv.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>${item.description}</p>
+            <p>Price: $${item.price.toFixed(2)}</p>
+            <p>Stock: ${item.stock_quantity}</p>
+            <img src="${item.image_path}" alt="${item.name}" class="product-image">
+        `;
         resultsContainer.appendChild(itemDiv);
     });
 }
