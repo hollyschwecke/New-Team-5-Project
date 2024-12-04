@@ -281,8 +281,9 @@ def search():
         cur = conn.cursor()
 
         # Fetch the username from the database (assuming user_id is stored in session)
-        session = user_id
-        user_id = session.get('user_id')
+        user_id = 1  # In practice, replace with session or user-specific ID
+        cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
+        user = cur.fetchone()
         
         
         cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
