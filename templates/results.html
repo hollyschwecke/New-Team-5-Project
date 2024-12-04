@@ -1,5 +1,12 @@
+<!-- 
+Author: Claire Lueking, Therese Goshen* see comment
+Purpose: Create a search results page for users to see search results
+Usage: utilize the css file for the login page "results.css", javascript to link to database entries
+-->
+
 <!DOCTYPE html>
 <html lang="en">
+    <link rel = "icon" href = "../static/front_images/pawprint_128.png" type = "image/x-icon"> <!-- Therese Goshen's Code to match main_page page icon -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +18,7 @@
     <title>Search Results</title>
 </head>
 <body>
-    <button id="signOutButton">Sign Out</button>
+    <a href="/login"><button id="signOutButton">Sign Out</button></a>
     <h1>Search Results</h1>
     <div id="resultsContainer">
     {% if results %}
