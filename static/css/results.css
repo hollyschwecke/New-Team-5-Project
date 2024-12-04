@@ -10,7 +10,7 @@ Usage: utilize the HTML file that this search results page is connected to "resu
 --rich-black: #050d10ff;
 --white: #fcfcfcff; */
 
-#h1 {
+h1 {
     text-align: center;
     font-family: "Spectral SC", serif;
     font-weight: 400;
