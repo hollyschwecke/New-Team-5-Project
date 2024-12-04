@@ -31,7 +31,11 @@ Usage: utilize the css file for the login page "searchpage.css", javascript, and
                 <h3>Start Searching Below.</h3>
             </div>
             <div class = "searchcontainer">
-                    <input type="text" id="searchInput" placeholder="Searching...">
+                <form action="/search/results" method="POST">
+                    <label for="search">Searching...</label>
+                    <input type="text" id="search" name="search">
+                </form>
+                    <!-- <input type="text" id="searchInput" placeholder="Searching..."> -->
                     <select id="filterSelect">
                         <option value="">All</option>
                         <option value="Category 1">Alphabetically</option>

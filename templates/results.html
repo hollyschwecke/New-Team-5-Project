@@ -16,9 +16,9 @@
                 <p>{{ result.description }}</p>
                 <p>Price: ${{ result.price }}</p>
                 <p>Stock: {{ result.stock_quantity }}</p>
-                <!-- {% if result.image_path %} -->
-                    <!-- <img src="{{ result.image_path }}" alt="{{ result.name }}" width="150"> -->
-                <!-- {% endif %} -->
+                {% if result.image_path %}
+                    <img src="{{ result.image_path }}" alt="{{ result.name }}" width="150">
+                {% endif %}
             </li>
         {% endfor %}
         </ul>
