@@ -1,3 +1,22 @@
+
+#signOutButton {
+    background-color: #504136ff; /* Red color */
+    color: white;
+    border: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    
+}
+
+#signOutButton:hover {
+    background-color: #a48c79ff; 
+}
+
 /* results container styling */
 #resultsContainer {
     margin-top: 20px;

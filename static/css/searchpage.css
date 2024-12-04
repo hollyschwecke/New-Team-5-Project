@@ -43,7 +43,7 @@ body {
 }
 
 #signOutButton:hover {
-    background-color: #a48c79ff; /* Darker red on hover */
+    background-color: #a48c79ff; 
 }
 /* username styling for username to be displayed in top right corner */
 #usernameDisplay {
