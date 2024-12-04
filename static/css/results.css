@@ -25,6 +25,9 @@
     border: 1px solid #a48c79ff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Spectral SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* results item styling */
