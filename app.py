@@ -336,15 +336,15 @@ def search():
 
     return render_template("searchpage.html", results=results, username=username)
 
-@app.route('/search/results', methods=['POST'])
+@app.route('/search/results', methods=['POST', 'GET'])
 def search_results():
     if request.method == 'POST':
         # Get search term and category filter from form
         search_term = request.form.get('search', '').strip()
-        filter_category = request.form.get('category', '').strip()
+        # filter_category = request.form.get('category', '').strip()
 
         # Redirect to the GET route with query parameters
-        return redirect(url_for('search_results', search=search_term, category=filter_category))
+        return redirect(url_for('search_results', search=search_term))
     
     conn = None
     cur = None
