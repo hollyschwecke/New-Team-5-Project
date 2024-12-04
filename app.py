@@ -303,16 +303,16 @@ def search():
         parameters = []
 
         search_term = request.form.get('search', '').strip()
-        filter_category = request.form.get('category', '').strip()
+        # filter_category = request.form.get('category', '').strip()
 
         # Build query based on inputs
         where_clauses = []
         if search_term:
             where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
             parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-        if filter_category:
-            where_clauses.append("p.category_id = %s")
-            parameters.append(filter_category)
+        # if filter_category:
+        #     where_clauses.append("p.category_id = %s")
+        #     parameters.append(filter_category)
 
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
@@ -354,7 +354,7 @@ def search_results():
 
         # Get search term and category filter from form
         search_term = request.form.get('search', '').strip()
-        filter_category = request.form.get('category', '').strip()
+        # filter_category = request.form.get('category', '').strip()
 
         # Base query
         query = '''
@@ -370,9 +370,9 @@ def search_results():
         if search_term:
             where_clauses.append("(p.name ILIKE %s OR p.description ILIKE %s)")
             parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-        if filter_category:
-            where_clauses.append("p.category_id = %s")
-            parameters.append(filter_category)
+        # if filter_category:
+        #     where_clauses.append("p.category_id = %s")
+        #     parameters.append(filter_category)
 
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)

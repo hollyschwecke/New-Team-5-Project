@@ -32,8 +32,7 @@ Usage: utilize the css file for the login page "searchpage.css", javascript to l
             </div>
             <div class = "searchcontainer">
                 <form action="/search/results" method="POST">
-                    <label for="search">Searching:</label>
-                    <input type="text" id="searchInput" name="search">
+                    <input type="text" id="searchInput" name="search" placeholder="Searching..." required>
                 </form>
                     <!-- <input type="text" id="searchInput" placeholder="Searching..."> -->
                     <select id="filterSelect">
@@ -44,7 +43,7 @@ Usage: utilize the css file for the login page "searchpage.css", javascript to l
                         <option value="Category 4">Price: High to Low</option>
                         <option value="Category 5">Product ID number</option>
                     </select>
-                    <button id="searchButton" type="submit">Search</button>
+                    <button type="submit" id="searchButton">Search</button>
                 <a href="/addproduct"><img src="../static/front_images/plus-6-128.png" alt="brown plus sign icon" class="icon2"></a>
             </div> 
             <div id="usernameDisplay"></div>
