@@ -65,62 +65,53 @@ dropdown.addEventListener('click', function(event) {
     }
 });
 
-document.getElementById('searchButton').addEventListener('click', function() {
+document.getElementById('searchButton').addEventListener('click', function () {
     const searchInput = document.getElementById('searchInput').value.trim();
     const filterSelect = document.getElementById('filterSelect').value;
 
-    // Create data object to send
-    const data = {
-        search: searchInput,
-        category: filterSelect
-    };
-
-    // Send POST request to the server
+    // Send a POST request to the /search route
     fetch('/search', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            search: searchInput,
+            category: filterSelect,
+        }),
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(results => {
-        displayResults(results);
-    })
-    .catch(error => {
-        console.error('Error during search:', error);
-        const resultsContainer = document.getElementById('resultsContainer');
-        resultsContainer.innerHTML = "<p>Error fetching search results. Please try again later.</p>";
-    });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            displayResults(data.results);
+        })
+        .catch((error) => {
+            console.error('Error fetching search results:', error);
+        });
 });
 
-// Function to display the results
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
-    resultsContainer.innerHTML = ""; // Clear previous results
+    resultsContainer.innerHTML = ''; // Clear previous results
 
     if (results.length === 0) {
-        resultsContainer.innerHTML = "<p>No results found.</p>";
+        resultsContainer.innerHTML = '<p>No results found.</p>';
         return;
     }
 
-    results.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = "result-item";
-
-        // Customize display based on returned columns
-        itemDiv.innerHTML = `
-            <h4>${item.name}</h4>
-            <p>${item.description}</p>
-            <p>Price: $${item.price.toFixed(2)}</p>
-            <p>Stock: ${item.stock_quantity}</p>
-            <img src="${item.image_path}" alt="${item.name}" class="product-image">
+    results.forEach((result) => {
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result-item');
+        resultDiv.innerHTML = `
+            <h3>${result.name}</h3>
+            <p>${result.description}</p>
+            <p>Price: $${result.price}</p>
+            <p>Stock: ${result.stock_quantity}</p>
         `;
-        resultsContainer.appendChild(itemDiv);
+        resultsContainer.appendChild(resultDiv);
     });
 }
