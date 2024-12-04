@@ -4,7 +4,7 @@
 import psycopg2
 import os
 # import petstorageAPI
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from datetime import datetime
 
 app = Flask(__name__)
@@ -299,20 +299,32 @@ def search():
 
         # Handle user input for searching or filtering
         if request.method == 'POST':
-            search_term = request.form.get('search', '').strip()
-            filter_category = request.form.get('category', '').strip()
+            return jsonify([
+        {
+            "product_id": row[0],
+            "name": row[1],
+            "description": row[2],
+            "price": float(row[3]),
+            "category_id": row[4],
+            "stock_quantity": row[5],
+            "date_added": row[6].isoformat(),
+            "image_path": row[7]
+        } for row in results
+    ])
+            # search_term = request.form.get('search', '').strip()
+            # filter_category = request.form.get('category', '').strip()
 
-            # Build query based on inputs
-            where_clauses = []
-            if search_term:
-                where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
-                parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-            if filter_category:
-                where_clauses.append("p.category_id = %s")
-                parameters.append(filter_category)
+            # # Build query based on inputs
+            # where_clauses = []
+            # if search_term:
+            #     where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
+            #     parameters.extend([f'%{search_term}%', f'%{search_term}%'])
+            # if filter_category:
+            #     where_clauses.append("p.category_id = %s")
+            #     parameters.append(filter_category)
 
-            if where_clauses:
-                query += " WHERE " + " AND ".join(where_clauses)
+            # if where_clauses:
+            #     query += " WHERE " + " AND ".join(where_clauses)
 
         cur.execute(query, parameters)
         results = cur.fetchall()
