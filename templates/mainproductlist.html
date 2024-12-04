@@ -29,9 +29,8 @@ Usage: utilize the css file for the login page "mainproductlist.css", javascript
                     <h2>Products</h2>
                 </div>
                 <form action="/search/results" method="POST">
-                    <label for="search">Searching:</label>
-                    <input type="text" id="searchInput" name="search">
-                </form>
+                    <input type="text" id="searchInput" name="search" placeholder="Searching..." required>
+                
                     <!-- <input type="text" id="searchInput" placeholder="Searching..."> -->
                     <!-- <img id="filteredImage" src="./front_images/empty-filter-128.png" alt="Filtered Image"> -->
                     <select id="filterSelect">
@@ -43,6 +42,7 @@ Usage: utilize the css file for the login page "mainproductlist.css", javascript
                         <option value="Category 5">Product ID number</option>
                     </select>
                     <button id="searchButton">Search</button>
+                </form>
                 <a href="/addproduct"><img src="../static/front_images/plus-6-128.png" alt="brown plus sign icon" class="icon2"></a>
             </div> 
             <div id="usernameDisplay"></div>
