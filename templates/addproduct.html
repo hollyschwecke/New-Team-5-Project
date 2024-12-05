@@ -26,7 +26,7 @@
             <form action="/addproduct" method="POST" enctype="multipart/form-data"> <!-- enctype required when uploading images -->
                 <div class="form-group">
                     <label for="product-name">Product Name:</label>
-                    <input type="text" id="product-name"required> <!-- input product name -->
+                    <input type="text" id="product-name" name="product-name"required> <!-- input product name -->
                 </div>
                 <div class="form-group">
                     <label for="category">Product Category:</label>
@@ -42,7 +42,7 @@
                 </div> 
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="number" id="price" step="0.01" required> <!-- input price -->
+                    <input type="number" id="price" name="price" step="0.01" required> <!-- input price -->
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
@@ -50,11 +50,11 @@
                 </div>
                 <div class="form-group">
                     <label for="quantity">Available Quantity:</label>
-                    <input type="number" id="quantity" min="0" required> <!-- input for quantity -->
+                    <input type="number" id="quantity" name="quantity" min="0" required> <!-- input for quantity -->
                 </div>
                 <div class="form-group">
                     <label for="picture">Upload Product Images:</label>
-                    <input type="file" id="images" name="images" accept="image/*"> <!-- input for images -->
+                    <input type="file" id="images" name="images" accept="image/*" multiple> <!-- input for images -->
                 <button class="icon-button">
                         <img src="../static/front_images/plus-6-128.png" alt="brown plus sign" class="icon">
                 </button>
