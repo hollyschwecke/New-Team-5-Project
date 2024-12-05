@@ -263,7 +263,7 @@ def login():
 
         if user:
             session['user_id'] = user[0]
-            return redirect(url_for('search', username=username)) # user exists
+            return redirect(url_for('\search', username=username)) # user exists
         else:
             message = "Invalid username or password"
             return render_template('login.html', message=message)
