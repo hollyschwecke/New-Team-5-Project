@@ -21,8 +21,7 @@ def create(db_filename):
         - Orders
         - Users
     """ 
-    # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database") # Connect to the database
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database") # Connect to the database
     c = conn.cursor() # Create a cursor object to execute SQL commands
 
     # Create the Products table
@@ -96,8 +95,7 @@ def create(db_filename):
 
 
 def fill(db_filename):
-    # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     c = conn.cursor()
     
     #category information inserted into Categories table except ID which is auto-generated and autoicremented
@@ -196,8 +194,7 @@ def select(db_filename, table_name, columns='*', where_clause=None, params=(), o
     Returns:
         list of tuples: The rows retrieved from the table.
     """
-    # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     c = conn.cursor()
 
     # Convert list of columns to a comma-separated string
@@ -221,8 +218,7 @@ def select(db_filename, table_name, columns='*', where_clause=None, params=(), o
 
 #drop table so there are no duplicates when calling
 def drop(db_filename):
-    # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     c = conn.cursor()
 
     #tables to drop
@@ -244,8 +240,7 @@ def drop(db_filename):
     conn.close()
 
 def check_user_credentials(username, password):
-    # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
     cur = conn.cursor()
 
     #query database
@@ -282,8 +277,7 @@ def search():
     cur = None
     username = None
     try:
-        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
 
         # Fetch the username from the database (if user is logged in)
@@ -292,7 +286,7 @@ def search():
             cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
             user = cur.fetchone()
             if user:
-                username = user[0]  # Extract username
+                username = user[1]  # Extract username
 
         # Default query to fetch all products
         query = '''
@@ -345,8 +339,7 @@ def search_results():
     conn = None
     cur = None
     try:
-        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
 
         # Get search term from form
@@ -404,8 +397,7 @@ def search_results():
 def main_product():
     try:
         # Connect to the database
-        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         
         # Fetch all products and their images
         query = '''
@@ -452,8 +444,7 @@ def adding_product():
                 image_paths.append(img_path)
 
         # create connection to db
-        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cursor = conn.cursor()
 
         # insert product data into products table
@@ -493,8 +484,8 @@ def creating_account():
         date_created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         # Connect to the database
-        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database") // internal link
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database") 
+        
         cursor = conn.cursor()
 
         # Insert the new user into the database
