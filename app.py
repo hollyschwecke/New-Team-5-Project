@@ -281,7 +281,7 @@ def search():
         cur = conn.cursor()
 
         # Fetch the username from the database (assuming user_id is stored in session)
-        user_id = 1  # In practice, replace with session or user-specific ID
+        user_id = 1  # In practice, replace with session or user-specific ID (ran out of time to do this properly)
         cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
         user = cur.fetchone()
         
@@ -303,16 +303,12 @@ def search():
         parameters = []
 
         search_term = request.form.get('search', '').strip()
-        # filter_category = request.form.get('category', '').strip()
 
         # Build query based on inputs
         where_clauses = []
         if search_term:
             where_clauses.append("(p.name LIKE %s OR p.description LIKE %s)")
             parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-        # if filter_category:
-        #     where_clauses.append("p.category_id = %s")
-        #     parameters.append(filter_category)
 
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
@@ -339,9 +335,8 @@ def search():
 @app.route('/search/results', methods=['POST', 'GET'])
 def search_results():
     if request.method == 'POST':
-        # Get search term and category filter from form
+        # Get search term from form
         search_term = request.form.get('search', '').strip()
-        # filter_category = request.form.get('category', '').strip()
 
         # Redirect to the GET route with query parameters
         return redirect(url_for('search_results', search=search_term))
@@ -352,9 +347,8 @@ def search_results():
         conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
 
-        # Get search term and category filter from form
+        # Get search term from form
         search_term = request.form.get('search', '').strip()
-        # filter_category = request.form.get('category', '').strip()
 
         # Base query
         query = '''
@@ -370,9 +364,6 @@ def search_results():
         if search_term:
             where_clauses.append("(p.name ILIKE %s OR p.description ILIKE %s)")
             parameters.extend([f'%{search_term}%', f'%{search_term}%'])
-        # if filter_category:
-        #     where_clauses.append("p.category_id = %s")
-        #     parameters.append(filter_category)
 
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
@@ -498,8 +489,8 @@ def creating_account():
         date_created = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         # Connect to the database
-        #conn = sqlite3.connect('petstore.db')
-        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+        # conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database") // internal link
+        conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
         cursor = conn.cursor()
 
         # Insert the new user into the database
@@ -524,7 +515,6 @@ def creating_main_page():
     return render_template('main_page.html')
 
 if __name__ == "__main__":
-    # app.run(debug=True)
     db_filename = 'petstore.db'
     create(db_filename)
     fill(db_filename)
