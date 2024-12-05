@@ -240,7 +240,7 @@ def drop(db_filename):
     conn.close()
 
 def check_user_credentials(username, password):
-    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
+    conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a.oregon-postgres.render.com/schwecke_lab10_database")
     cur = conn.cursor()
 
     #query database
