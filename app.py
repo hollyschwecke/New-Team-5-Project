@@ -291,7 +291,7 @@ def search():
                 print("No user found for the given user_id.")
         else:
             print ("User is not logged in.")
-            return redirect(url_for('login'))
+            # return redirect(url_for('login'))
 
         # Default query to fetch all products
         query = '''
