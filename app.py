@@ -4,7 +4,7 @@
 import psycopg2
 import os
 # import petstorageAPI
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import datetime
 
 app = Flask(__name__)
@@ -263,6 +263,7 @@ def login():
         user = check_user_credentials(username, password)
 
         if user:
+            session['user_id'] = user[0]
             return redirect(url_for('search', username=username)) # user exists
         else:
             message = "Invalid username or password"
@@ -280,18 +281,13 @@ def search():
         conn = psycopg2.connect("postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database")
         cur = conn.cursor()
 
-        # Fetch the username from the database (assuming user_id is stored in session)
-        user_id = 1  # In practice, replace with session or user-specific ID (ran out of time to do this properly)
-        cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
-        user = cur.fetchone()
-        
-        
-        cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
-        user = cur.fetchone()
-        
-        if user:
-            username = user[0]  # Extract username from the result
-
+        # Fetch the username from the database (if user is logged in)
+        if 'user_id' in session:
+            user_id = session['user_id']
+            cur.execute('SELECT username FROM users WHERE user_id = %s', (user_id,))
+            user = cur.fetchone()
+            if user:
+                username = user[0]  # Extract username
 
         # Default query to fetch all products
         query = '''
