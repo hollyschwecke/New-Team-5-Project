@@ -28,11 +28,9 @@ Usage: utilize the css file for the login page "mainproductlist.css", javascript
                 <div class="productheaderbox">
                     <h2>Products</h2>
                 </div>
+                <!-- Redirecting to results page from search -->
                 <form action="/search/results" method="POST">
                     <input type="text" id="searchInput" name="search" placeholder="Searching..." required>
-                
-                    <!-- <input type="text" id="searchInput" placeholder="Searching..."> -->
-                    <!-- <img id="filteredImage" src="./front_images/empty-filter-128.png" alt="Filtered Image"> -->
                     <select id="filterSelect">
                         <option value="">All</option>
                         <option value="Category 1">Alphabetically</option>
@@ -48,9 +46,6 @@ Usage: utilize the css file for the login page "mainproductlist.css", javascript
             <div id="usernameDisplay"></div>
             <div id="resultsContainer" class="results-container"></div>
         </div>
-
-    
-
 
         <!-- Loading JavaScript Elements, but making sure those elements exist before doing that -->
         <script src="../static/javascript/mainproductlist.js"></script>

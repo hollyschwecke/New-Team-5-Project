@@ -67,13 +67,13 @@ document.getElementById('searchButton').addEventListener('click', function () {
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
-    window.location.href = '/search/results';
-
+    window.location.href = '/search/results'; //redirect to search results page
+    //no results found case
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>No results found.</p>';
         return;
     }
-
+    // for each result do this
     results.forEach((result) => {
         const resultDiv = document.createElement('div');
         resultDiv.classList.add('result-item');

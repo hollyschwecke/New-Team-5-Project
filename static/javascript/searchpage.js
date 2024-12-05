@@ -97,13 +97,14 @@ document.getElementById('searchButton').addEventListener('click', function () {
 function displayResults(results) {
     const resultsContainer = document.getElementById('resultsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
-    window.location.href = '/search/results';
+    window.location.href = '/search/results'; // redirect to search results page
 
+    //no results case
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>No results found.</p>';
         return;
     }
-
+    // display results for each item
     results.forEach((result) => {
         const resultDiv = document.createElement('div');
         resultDiv.classList.add('result-item');
