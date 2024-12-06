@@ -42,7 +42,13 @@
 
 * Trello: [<https://trello.com/b/A6Fg013J>](https://trello.com/b/A6Fg013J/git-good2)>
 
-## Render Link
-* [[https://new-team-5-project.onrender.com](](https://new-team-5-project-qoss.onrender.com)
+## [User Guide](https://github.com/hollyschwecke/New-Team-5-Project/blob/main/User_Guide.md)
+* Documentation for use of project
+
+## [Project Demo Link (Zoom Video)](https://cuboulder.zoom.us/rec/share/jQNk2EpTyMi2jBXjZeWDlf1WiT6biPIXmusu0lRbnMG6H0yl4W0Uyjum-pV6LAKb.340f-8zjSrSe4dSZ)
+* Passcode for demo video: P5WA2sT^
+
+## Render (Web Hosting) Link
+* [https://new-team-5-project.onrender.com](https://new-team-5-project-qoss.onrender.com)
 * postgresql://schwecke_lab10_database_user:4NeoO85Ipw8AavH2X3IOOflP6aOlVbfA@dpg-csluug1u0jms73b9eflg-a/schwecke_lab10_database
 
